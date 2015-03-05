@@ -28,11 +28,30 @@
             </StackPanel>
             <Line Stroke="#FF3986B4" Margin="0,10,0,0" StrokeThickness="2" X2="900" />
             <StackPanel Name="Tasks" HorizontalAlignment="Left" Margin="0,20,0,0">
+                <TextBlock>Rom Functions</TextBlock>
                 <StackPanel Orientation="Horizontal">
                     <Button Name="CleanRoms">Clean Rom Names</Button>
                     
-                    <Button Name="CleanRomsRenameForShield" Margin="10,0,0,0">Setup Roms for Shield Streaming</Button>
+                    <Button Name="CleanRomsRenameForShield" Margin="10,0,0,0">Rename Roms for Shield Streaming</Button>
                     <TextBlock>[?]</TextBlock>
+                </StackPanel>
+                
+                <StackPanel Name="CommandLineFunctions">
+                    
+                </StackPanel>
+                
+                <StackPanel Name="SteamFunctions" Margin="0,10,0,0">
+                    <TextBlock>Steam Functions</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Name="CreateSteamShortcuts">Create Steam Rom Shortcuts</Button>
+                        <StackPanel>
+                            <CheckBox IsChecked="True" Margin="5,0,0,0">Download Grid Images</CheckBox>
+                            <TextBlock Margin="5,0,0,0">API URL</TextBlock>
+                            <TextBox Margin="5,0,0,0" Width="500">http://www.consolegrid.com/</TextBox>
+                        </StackPanel>
+                        
+                    </StackPanel>                    
+                    <Button Name="DeleteSteamShortcuts" Margin="0,10,0,0">Delete Steam Shortcuts</Button>
                 </StackPanel>
                 
             </StackPanel>
