@@ -79,6 +79,23 @@ namespace MEGAEmulationManager.Models
                 OnPropertyChanged("EmulatorDirectory");
             }
         }
+
+        public string RomsLoadedCount
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(RomsLoadedCount))
+                {
+                    return "0";
+                }
+                return RomsLoadedCount;
+            }
+            set
+            {
+                RomsLoadedCount = value;
+                OnPropertyChanged("RomsLoadedCount");
+            }
+        }
         #endregion
 
         #region methods
