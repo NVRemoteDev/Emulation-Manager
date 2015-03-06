@@ -9,13 +9,12 @@ namespace MEGAEmulationManager.ViewModels
 {
     public class EmuManagerViewModel
     {
-        public EmuManagerModel _model;
+        public EmuManagerModel EmuManagerModel { get; set; }
 
         public EmuManagerViewModel()
         {
-            _model = new EmuManagerModel();
+            EmuManagerModel = new EmuManagerModel();
         }
 
-        
     }
 }
