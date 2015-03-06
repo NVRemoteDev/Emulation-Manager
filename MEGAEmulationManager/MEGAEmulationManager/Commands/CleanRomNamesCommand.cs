@@ -11,9 +11,9 @@ namespace MEGAEmulationManager.Commands
     public class CleanRomNamesCommand : ICommand
     {
         private EmuManagerViewModel _viewModel;
-        public CleanRomNamesCommand(EmuManagerViewModel viewmodel)
+        public CleanRomNamesCommand(EmuManagerViewModel viewModel)
         {
-            _viewModel = viewmodel;
+            _viewModel = viewModel;
         }
 
         #region ICommand Members

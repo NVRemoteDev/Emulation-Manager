@@ -11,9 +11,9 @@ namespace MEGAEmulationManager.Commands
     public class DeleteSteamShortcutsCommand : ICommand
     {
         private EmuManagerViewModel _viewModel;
-        public DeleteSteamShortcutsCommand(EmuManagerViewModel viewmodel)
+        public DeleteSteamShortcutsCommand(EmuManagerViewModel viewModel)
         {
-            _viewModel = viewmodel;
+            _viewModel = viewModel;
         }
 
         #region ICommand Members

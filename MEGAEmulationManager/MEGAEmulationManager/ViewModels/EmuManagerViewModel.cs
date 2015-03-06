@@ -15,28 +15,28 @@ namespace MEGAEmulationManager.ViewModels
 
         #region ICommands and Related Properties
         public ICommand BrowseRomDirectoryCommand { get; private set; }
-        public bool CanBrowseRomDirectory { get { return true; } private set; }
+        public bool CanBrowseRomDirectory { get { return true; } }
 
         public ICommand BrowseEmulatorDirectoryCommand { get; private set; }
-        public bool CanBrowseEmulatorDirectory { get { return true; } private set; }
+        public bool CanBrowseEmulatorDirectory { get { return true; }}
         
         public ICommand LoadRomsIntoGURUCommand { get; private set; }
-        public bool CanLoadRomsIntoGURU { get { return true; } private set; }
+        public bool CanLoadRomsIntoGURU { get { return true; } }
         
         public ICommand CleanRomNamesCommand { get; private set; }
-        public bool CanCleanRomNames { get { return true; } private set; }
+        public bool CanCleanRomNames { get { return true; } }
         
         public ICommand CheckRomStreamingCompatibilityCommand { get; private set; }
-        public bool CanCheckRomStreamingCompatibility { get { return true; } private set; }
+        public bool CanCheckRomStreamingCompatibility { get { return true; } }
         
         public ICommand FixRomStreamingCompatibilityCommand { get; private set; }
-        public bool CanFixRomStreamingCompatibility { get { return true; } private set; }
+        public bool CanFixRomStreamingCompatibility { get { return true; } }
         
         public ICommand CreateSteamShortcutsCommand { get; private set; }
-        public bool CanCreateSteamShortcuts { get { return true; } private set; }
+        public bool CanCreateSteamShortcuts { get { return true; } }
         
         public ICommand DeleteSteamShortcutsCommand { get; private set; }
-        public bool CanDeleteSteamShortcuts { get { return true; } private set; }
+        public bool CanDeleteSteamShortcuts { get { return true; } }
         #endregion
 
         public EmuManagerViewModel()

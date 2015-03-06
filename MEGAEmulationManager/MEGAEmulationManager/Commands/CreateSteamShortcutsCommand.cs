@@ -11,9 +11,9 @@ namespace MEGAEmulationManager.Commands
     public class CreateSteamShortcutsCommand : ICommand
     {
         private EmuManagerViewModel _viewModel;
-        public CreateSteamShortcutsCommand(EmuManagerViewModel viewmodel)
+        public CreateSteamShortcutsCommand(EmuManagerViewModel viewModel)
         {
-            _viewModel = viewmodel;
+            _viewModel = viewModel;
         }
 
         #region ICommand Members

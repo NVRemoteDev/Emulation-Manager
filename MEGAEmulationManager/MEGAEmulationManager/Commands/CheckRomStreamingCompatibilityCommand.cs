@@ -11,9 +11,9 @@ namespace MEGAEmulationManager.Commands
     public class CheckRomStreamingCompatibilityCommand : ICommand
     {
         private EmuManagerViewModel _viewModel;
-        public CheckRomStreamingCompatibilityCommand(EmuManagerViewModel viewmodel)
+        public CheckRomStreamingCompatibilityCommand(EmuManagerViewModel viewModel)
         {
-            _viewModel = viewmodel;
+            _viewModel = viewModel;
         }
 
         #region ICommand Members

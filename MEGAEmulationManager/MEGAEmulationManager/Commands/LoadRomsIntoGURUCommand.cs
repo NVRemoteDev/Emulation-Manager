@@ -11,9 +11,9 @@ namespace MEGAEmulationManager.Commands
     public class LoadRomsIntoGURUCommand : ICommand
     {
         private EmuManagerViewModel _viewModel;
-        public LoadRomsIntoGURUCommand(EmuManagerViewModel viewmodel)
+        public LoadRomsIntoGURUCommand(EmuManagerViewModel viewModel)
         {
-            _viewModel = viewmodel;
+            _viewModel = viewModel;
         }
 
         #region ICommand Members
