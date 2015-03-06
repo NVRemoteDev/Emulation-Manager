@@ -61,6 +61,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\EmuManagerModel.cs" />
+    <Compile Include="ViewModels\EmuManagerViewModel.cs" />
     <Compile Include="Views\EmuManager.xaml.cs">
       <DependentUpon>EmuManager.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -92,10 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

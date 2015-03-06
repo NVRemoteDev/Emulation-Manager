@@ -1,15 +1,13 @@
 ﻿<Window x:Class="MEGAEmulationManager.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="GURU Emulation Manager" Height="525" Width="890" ResizeMode="CanMinimize" Background="#FFF6F6F4" Foreground="#FF010101" BorderBrush="#FFFF1717">
+        Title="GURU Emulation Manager" Height="535" Width="890" ResizeMode="CanMinimize" Background="#FFF6F6F4" Foreground="#FF010101" BorderBrush="#FFFF1717">
     <Grid>
-        <Menu Height="20">
-            <MenuItem>Test</MenuItem>
-        </Menu>
         <StackPanel Name="Main" Margin="10,10,10,10">
+            <TextBlock FontFamily="Tahoma" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="32" Foreground="#FF494949">GURU Emulation Manager</TextBlock>
             <StackPanel Name="Config" Orientation="Horizontal">
                 <StackPanel Name="RomConfig" HorizontalAlignment="Left" Margin="10,0,0,0">
-                    <TextBlock>Root Roms Directory [?]</TextBlock>
+                    <TextBlock FontSize="14" FontWeight="Medium">Root Roms Directory [?]</TextBlock>
                     <!-- TODO: Add Help Button Here that has the textblock text below-->
                     <TextBlock HorizontalAlignment="Left" Width="400" TextWrapping="Wrap">The root roms directory should be just above all of your categorized rom folders. I.E. if you have a folder layout "C:\Roms\N64" "C:\Roms\Playstation", enter "C:\Roms\"</TextBlock>
 
@@ -18,8 +16,8 @@
                         <Button Margin="5,0,0,0" Padding="20,0,20,0" FontSize="14">...</Button>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel Name="EmulatorConfig" HorizontalAlignment="Right" Margin="35,0,0,0">
-                    <TextBlock>Root Emulators Directory [?]</TextBlock>
+                <StackPanel Name="EmulatorConfig" HorizontalAlignment="Right" Margin="32,0,0,0">
+                    <TextBlock FontSize="14" FontWeight="Medium">Root Emulators Directory [?]</TextBlock>
                     <!-- TODO: Add Help Button Here that has the textblock text below-->
                     <TextBlock HorizontalAlignment="Left" Width="400" TextWrapping="Wrap">The root emulators directory should be just above all of your categorized emulator folders. Ie if you have a folder layout "C:\Emulators\N64" "C:\Emulators\Playstation", enter "C:\Emulators\"</TextBlock>
 
@@ -32,16 +30,19 @@
             <Line Stroke="#FF3986B4" Margin="0,10,0,0" StrokeThickness="2" X2="900" />
             <StackPanel Name="Tasks" HorizontalAlignment="Left" Margin="0,20,0,0">
                 <TextBlock FontSize="14" FontWeight="Medium">Rom Functions</TextBlock>
-                <StackPanel Orientation="Horizontal" Height="49">
-                    <Button Name="LoadRoms" Padding="5" FontSize="20">Load Roms into GURU</Button>
-                    <Button Name="CleanRoms" Margin="10,0,0,0" Padding="5" FontSize="20">Clean Rom Names</Button>
-                    <TextBlock VerticalAlignment="Center" Margin="5,0,0,0">[?]</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Height="49">
+                        <Button Name="LoadRoms" Padding="5" FontSize="20">Load Roms into GURU</Button>
+                        <Button Name="CleanRoms" Margin="10,0,0,0" Padding="5" FontSize="20">Clean Rom Names</Button>
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0">[?]</TextBlock>
+                    </StackPanel>
                 </StackPanel>
+                
                 <StackPanel Orientation="Horizontal">
                     <TextBlock>Roms Loaded: 0</TextBlock>
                     <CheckBox IsChecked="True" Margin="30,1,0,0" VerticalAlignment="Center">Automatically load roms on program startup</CheckBox>
                 </StackPanel>
-                
+
 
                 <StackPanel Name="ShieldFunctions" Margin="0,10,0,0" HorizontalAlignment="Left">
                     <TextBlock FontSize="14" FontWeight="Medium">Steam Link/Shield/Limelight Big Picture Streaming Functions</TextBlock>
@@ -52,7 +53,7 @@
                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,0">[?]</TextBlock>
                     </StackPanel>
                 </StackPanel>
-                
+
                 <StackPanel Name="SteamFunctions" Margin="0,10,0,0">
                     <TextBlock FontSize="14" FontWeight="Medium">Steam Functions</TextBlock>
                     <StackPanel Orientation="Horizontal">
@@ -62,7 +63,7 @@
                                 <CheckBox IsChecked="True" Margin="5,0,0,0">Download Grid Images</CheckBox>
                                 <Button Name="DeleteSteamShortcuts" Width="150" Margin="210,0,0,0" HorizontalAlignment="Right" Background="#FFE00E0E" Foreground="White">Delete Steam Shortcuts</Button>
                             </StackPanel>
-                            
+
                             <TextBlock Margin="5,0,0,0">Grid Images API URL (For advanced users only)</TextBlock>
 
                             <TextBox Margin="5,0,0,0" Width="500">http://consolegrid.com/api/top_picture?console=%n&amp;game=%g</TextBox>
@@ -71,15 +72,15 @@
                                 <TextBlock>Key: %n = console nickname, %f = console full name, %g = game name</TextBlock>
                             </StackPanel>
                         </StackPanel>
-                    </StackPanel>                    
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
 
             <StackPanel Name="Footer" HorizontalAlignment="Right" VerticalAlignment="Bottom">
                 <TextBlock>Copyright© 2015</TextBlock>
             </StackPanel>
-            
+
         </StackPanel>
-        
+
     </Grid>
 </Window>
