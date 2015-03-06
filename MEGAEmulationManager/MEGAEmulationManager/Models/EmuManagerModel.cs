@@ -10,5 +10,10 @@ namespace MEGAEmulationManager.Models
     {
         public EmuManagerModel()
         { }
+
+        public string imageApiUrl { get; set; }
+
+        public bool autoImportRoms { get; set; }
+    
     }
 }

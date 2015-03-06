@@ -4,7 +4,7 @@
         Title="GURU Emulation Manager" Height="535" Width="890" ResizeMode="CanMinimize" Background="#FFF6F6F4" Foreground="#FF010101" BorderBrush="#FFFF1717">
     <Grid>
         <StackPanel Name="Main" Margin="10,10,10,10">
-            <TextBlock FontFamily="Tahoma" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="32" Foreground="#FF494949">GURU Emulation Manager</TextBlock>
+            <TextBlock FontFamily="Tahoma" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="32" Margin="0,0,0,10" Foreground="#FF494949">GURU Emulation Manager</TextBlock>
             <StackPanel Name="Config" Orientation="Horizontal">
                 <StackPanel Name="RomConfig" HorizontalAlignment="Left" Margin="10,0,0,0">
                     <TextBlock FontSize="14" FontWeight="Medium">Root Roms Directory [?]</TextBlock>
