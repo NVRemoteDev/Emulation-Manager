@@ -1,7 +1,7 @@
 ﻿<Window x:Class="MEGAEmulationManager.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MEGA Emulation Manager" Height="525" Width="890" ResizeMode="CanMinimize" Background="#FFF6F6F4" Foreground="#FF010101" BorderBrush="#FFFF1717">
+        Title="GURU Emulation Manager" Height="525" Width="890" ResizeMode="CanMinimize" Background="#FFF6F6F4" Foreground="#FF010101" BorderBrush="#FFFF1717">
     <Grid>
         <Menu Height="20">
             <MenuItem>Test</MenuItem>
@@ -31,35 +31,45 @@
             </StackPanel>
             <Line Stroke="#FF3986B4" Margin="0,10,0,0" StrokeThickness="2" X2="900" />
             <StackPanel Name="Tasks" HorizontalAlignment="Left" Margin="0,20,0,0">
-                <TextBlock>Rom Functions</TextBlock>
+                <TextBlock FontSize="14" FontWeight="Medium">Rom Functions</TextBlock>
                 <StackPanel Orientation="Horizontal" Height="49">
-                    <Button Name="LoadRoms" Padding="5">Load Roms Into MEGA</Button>
-                    <Button Name="CleanRoms" Margin="10,0,0,0" Padding="5">Clean Rom Names</Button>
+                    <Button Name="LoadRoms" Padding="5" FontSize="20">Load Roms into GURU</Button>
+                    <Button Name="CleanRoms" Margin="10,0,0,0" Padding="5" FontSize="20">Clean Rom Names</Button>
                     <TextBlock VerticalAlignment="Center" Margin="5,0,0,0">[?]</TextBlock>
                 </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>Roms Loaded: 0</TextBlock>
+                    <CheckBox IsChecked="True" Margin="30,1,0,0" VerticalAlignment="Center">Automatically load roms on program startup</CheckBox>
+                </StackPanel>
+                
 
                 <StackPanel Name="ShieldFunctions" Margin="0,10,0,0" HorizontalAlignment="Left">
-                    <TextBlock>Shield/Limelight Big Picture Streaming Functions</TextBlock>
+                    <TextBlock FontSize="14" FontWeight="Medium">Steam Link/Shield/Limelight Big Picture Streaming Functions</TextBlock>
                     <StackPanel Orientation="Horizontal">
-                        <Button Name="CheckShieldCompatability" Height="50" Padding="5">Check Nvidia Shield Rom Name and Folder Compatability</Button>
+                        <Button Name="CheckShieldCompatability" Height="50" Padding="5" FontSize="20">Check Rom Streaming Compatability</Button>
                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,0">[?]</TextBlock>
-                        <Button Name="CleanRomsRenameForShield" Margin="5,0,0,0" Padding="5">Rename Roms for Shield Streaming</Button>
+                        <Button Name="CleanRomsRenameForShield" Margin="5,0,0,0" Padding="5" FontSize="20">Fix All Roms for Streaming</Button>
                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,0">[?]</TextBlock>
                     </StackPanel>
                 </StackPanel>
                 
                 <StackPanel Name="SteamFunctions" Margin="0,10,0,0">
-                    <TextBlock>Steam Functions</TextBlock>
+                    <TextBlock FontSize="14" FontWeight="Medium">Steam Functions</TextBlock>
                     <StackPanel Orientation="Horizontal">
                         <Button Name="CreateSteamShortcuts" Padding="5" Foreground="#FFFBFBFB" BorderBrush="#FF030404" Background="#FF2EBB28">Create Steam Rom Shortcuts</Button>
-                        <StackPanel Height="60">
+                        <StackPanel Height="72">
                             <StackPanel Orientation="Horizontal">
                                 <CheckBox IsChecked="True" Margin="5,0,0,0">Download Grid Images</CheckBox>
                                 <Button Name="DeleteSteamShortcuts" Width="150" Margin="210,0,0,0" HorizontalAlignment="Right" Background="#FFE00E0E" Foreground="White">Delete Steam Shortcuts</Button>
                             </StackPanel>
                             
-                            <TextBlock Margin="5,0,0,0">Grid Images API URL</TextBlock>
-                            <TextBox Margin="5,0,0,0" Width="500">http://consolegrid.com/api/top_picture?console=%c&amp;game=%g</TextBox>
+                            <TextBlock Margin="5,0,0,0">Grid Images API URL (For advanced users only)</TextBlock>
+
+                            <TextBox Margin="5,0,0,0" Width="500">http://consolegrid.com/api/top_picture?console=%n&amp;game=%g</TextBox>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock>Key: %n = console nickname, %f = console full name, %g = game name</TextBlock>
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>                    
                 </StackPanel>
