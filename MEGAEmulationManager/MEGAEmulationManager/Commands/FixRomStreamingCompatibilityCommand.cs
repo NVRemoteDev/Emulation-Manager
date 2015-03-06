@@ -8,10 +8,10 @@ using System.Windows.Input;
 
 namespace MEGAEmulationManager.Commands
 {
-    public class CheckRomStreamingCompatibilityCommand : ICommand
+    public class FixRomStreamingCompatibilityCommand : ICommand
     {
         private EmuManagerViewModel _viewModel;
-        public CheckRomStreamingCompatibilityCommand(EmuManagerViewModel viewmodel)
+        public FixRomStreamingCompatibilityCommand(EmuManagerViewModel viewmodel)
         {
             _viewModel = viewmodel;
         }
@@ -19,7 +19,7 @@ namespace MEGAEmulationManager.Commands
         #region ICommand Members
         public bool CanExecute(object parameter)
         {
-            return _viewModel.CanCheckRomStreamingCompatibility;
+            return _viewModel.CanFixRomStreamingCompatibility;
         }
 
         public event EventHandler CanExecuteChanged { add { } remove { } }
@@ -28,7 +28,7 @@ namespace MEGAEmulationManager.Commands
         {
             if (CanExecute(parameter))
             {
-                _viewModel.CheckRomStreamingCompatibility();
+                _viewModel.FixRomStreamingCompatibility();
             }
         }
         #endregion

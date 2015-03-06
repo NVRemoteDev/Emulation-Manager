@@ -10,10 +10,27 @@ namespace MEGAEmulationManager.Commands
 {
     public class DeleteSteamShortcutsCommand : ICommand
     {
-        private EmuManagerViewModel _viewmodel;
+        private EmuManagerViewModel _viewModel;
         public DeleteSteamShortcutsCommand(EmuManagerViewModel viewmodel)
         {
-            _viewmodel = viewmodel;
+            _viewModel = viewmodel;
         }
+
+        #region ICommand Members
+        public bool CanExecute(object parameter)
+        {
+            return _viewModel.CanDeleteSteamShortcuts;
+        }
+
+        public event EventHandler CanExecuteChanged { add { } remove { } }
+
+        public void Execute(object parameter)
+        {
+            if (CanExecute(parameter))
+            {
+                _viewModel.DeleteSteamShortcuts();
+            }
+        }
+        #endregion
     }
 }
