@@ -48,13 +48,12 @@
                     <CheckBox IsChecked="{Binding EmuManagerModel.AutoImportRoms, Mode=TwoWay}" Margin="30,1,0,0" VerticalAlignment="Center">Automatically load roms on program startup</CheckBox>
                 </StackPanel>
 
-
                 <StackPanel Name="ShieldFunctions" Margin="0,10,0,0" HorizontalAlignment="Left">
                     <TextBlock FontSize="14" FontWeight="Medium">Steam Link/Shield/Limelight Big Picture Streaming Functions</TextBlock>
                     <StackPanel Orientation="Horizontal">
-                        <Button Name="CheckShieldCompatability" Height="50" Padding="5" FontSize="20">Check Rom Streaming Compatibility</Button>
+                        <Button Name="CheckShieldCompatabilityButton" Height="50" Padding="5" FontSize="20">Check Rom Streaming Compatibility</Button>
                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,0">[?]</TextBlock>
-                        <Button Name="CleanRomsRenameForShield" Margin="5,0,0,0" Padding="5" FontSize="20">Fix Rom Streaming Compatibility</Button>
+                        <Button Name="CleanRomsRenameForShieldButton" Margin="5,0,0,0" Padding="5" FontSize="20">Fix Rom Streaming Compatibility</Button>
                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,0">[?]</TextBlock>
                     </StackPanel>
                 </StackPanel>
@@ -62,11 +61,11 @@
                 <StackPanel Name="SteamFunctions" Margin="0,10,0,0">
                     <TextBlock FontSize="14" FontWeight="Medium">Steam Functions</TextBlock>
                     <StackPanel Orientation="Horizontal">
-                        <Button Name="CreateSteamShortcuts" Padding="5" Foreground="#FFFBFBFB" BorderBrush="#FF030404" Background="#FF2EBB28">Create Steam Rom Shortcuts</Button>
+                        <Button Name="CreateSteamShortcutsButton" Padding="5" Foreground="#FFFBFBFB" BorderBrush="#FF030404" Background="#FF2EBB28">Create Steam Rom Shortcuts</Button>
                         <StackPanel Height="72">
                             <StackPanel Orientation="Horizontal">
                                 <CheckBox IsChecked="{Binding EmuManagerModel.DownloadGridImages, Mode=TwoWay}" Margin="5,0,0,0">Download Grid Images</CheckBox>
-                                <Button Name="DeleteSteamShortcuts" Width="150" Margin="210,0,0,0" HorizontalAlignment="Right" Background="#FFE00E0E" Foreground="White">Delete Steam Shortcuts</Button>
+                                <Button Name="DeleteSteamShortcutsButton" Width="150" Margin="210,0,0,0" HorizontalAlignment="Right" Background="#FFE00E0E" Foreground="White">Delete Steam Shortcuts</Button>
                             </StackPanel>
 
                             <TextBlock Margin="5,0,0,0">Grid Images API URL (For advanced users only)</TextBlock>
