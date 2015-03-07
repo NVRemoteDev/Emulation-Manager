@@ -2,66 +2,77 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:MEGAEmulationManager.ViewModels"
-        Title="GURU Emulation Manager w/ Steam Rom Support" Height="535" Width="890" ResizeMode="CanMinimize" Background="#FFF6F6F4" Foreground="#FF010101" BorderBrush="#FFFF1717">
-    
+        Title="GURU Emulation Manager w/ Steam Rom Support" Height="635" Width="890" ResizeMode="CanMinimize" Background="#FFF6F6F4" Foreground="#FF010101" BorderBrush="#FFFF1717">
+
     <Window.Resources>
         <local:EmuManagerViewModel x:Key="EMViewModel" />
     </Window.Resources>
     <Grid DataContext="{StaticResource EMViewModel}">
-        <StackPanel Name="Main" Margin="10,10,10,10">
+        <StackPanel Name="Main" Margin="10,20,10,10">
             <TextBlock FontFamily="Tahoma" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="32" Margin="0,0,0,10" Foreground="#FF494949">GURU Emulation Manager</TextBlock>
             <StackPanel Name="Config" Orientation="Horizontal">
                 <StackPanel Name="RomConfig" HorizontalAlignment="Left" Margin="10,0,0,0">
-                    <TextBlock FontSize="14" FontWeight="Medium">Root Roms Directory [?]</TextBlock>
+                    <TextBlock FontSize="14" FontWeight="Medium">Root Roms Directory <Path Width="16" Height="16" Stretch="Uniform" Data="F1 M 15.6001,5.22C 17.3822,5.2515 18.82,5.87949 19.9133,7.104C 21.0067,8.32849 21.5689,9.96048 21.6,12C 21.5923,14.7711 20.4267,16.468 18.1031,17.0906L 18.1031,19.2L 13.1146,19.2L 13.1146,14.3069C 13.4637,14.3485 13.7175,14.3652 13.8762,14.3569C 15.7127,14.5413 16.6373,13.7557 16.65,12C 16.6584,10.3585 16.2917,9.5585 15.55,9.59998C 14.7667,9.59198 14.3834,10.392 14.4,12L 9.45001,12C 9.47205,7.54944 11.5221,5.28946 15.6001,5.22 Z M 15.6501,21.06C 16.4651,21.0844 17.1408,21.3759 17.6773,21.9342C 18.2138,22.4926 18.4919,23.1713 18.5118,23.9701C 18.492,24.769 18.2138,25.4475 17.6773,26.0059C 17.1408,26.5641 16.4651,26.8555 15.6501,26.88C 14.813,26.8555 14.1151,26.5641 13.5565,26.0059C 12.9979,25.4475 12.7079,24.769 12.6863,23.9701C 12.7079,23.1507 12.9979,22.4662 13.5565,21.9167C 14.1151,21.3671 14.813,21.0815 15.6501,21.06 Z M 15.6501,0C 11.2097,0.105347 7.51904,1.64291 4.57797,4.61276C 1.6369,7.58261 0.110931,11.3527 0,15.9231C 0.110931,20.2214 1.6369,23.8045 4.57797,26.6724C 7.51904,29.5402 11.2097,31.0294 15.6501,31.14C 19.9496,31.0294 23.5613,29.5402 26.4853,26.6724C 29.4093,23.8045 30.9309,20.2214 31.05,15.9231C 30.9309,11.3527 29.4093,7.58264 26.4853,4.61276C 23.5613,1.64291 19.9496,0.105347 15.6501,0 Z " Fill="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"/></TextBlock>
                     <!-- TODO: Add Help Button Here that has the textblock text below-->
                     <TextBlock HorizontalAlignment="Left" Width="400" TextWrapping="Wrap">The root roms directory should be just above all of your categorized rom folders. I.E. if you have a folder layout "C:\Roms\N64" "C:\Roms\Playstation", enter "C:\Roms\ (trailing slash optional)"</TextBlock>
 
-                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
                         <TextBox x:Name="RomDirectoryTextBox" Width="350" Text="{Binding EmuManagerModel.RomDirectory, Mode=TwoWay}"/>
-                        <Button x:Name="BrowseRomDirectoryButton" Margin="5,0,0,0" Padding="20,0,20,0" FontSize="14">...</Button>
+                        <Button x:Name="BrowseRomDirectoryButton" Margin="5,0,0,0" Padding="20,0,20,0" FontSize="14" Click="BrowseRomDirectoryButton_Click">...</Button>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Name="EmulatorConfig" HorizontalAlignment="Right" Margin="32,0,0,0">
-                    <TextBlock FontSize="14" FontWeight="Medium">Root Emulators Directory [?]</TextBlock>
+                    <TextBlock FontSize="14" FontWeight="Medium">Root Emulators Directory <Path Width="16" Height="16" Stretch="Uniform" Data="F1 M 15.6001,5.22C 17.3822,5.2515 18.82,5.87949 19.9133,7.104C 21.0067,8.32849 21.5689,9.96048 21.6,12C 21.5923,14.7711 20.4267,16.468 18.1031,17.0906L 18.1031,19.2L 13.1146,19.2L 13.1146,14.3069C 13.4637,14.3485 13.7175,14.3652 13.8762,14.3569C 15.7127,14.5413 16.6373,13.7557 16.65,12C 16.6584,10.3585 16.2917,9.5585 15.55,9.59998C 14.7667,9.59198 14.3834,10.392 14.4,12L 9.45001,12C 9.47205,7.54944 11.5221,5.28946 15.6001,5.22 Z M 15.6501,21.06C 16.4651,21.0844 17.1408,21.3759 17.6773,21.9342C 18.2138,22.4926 18.4919,23.1713 18.5118,23.9701C 18.492,24.769 18.2138,25.4475 17.6773,26.0059C 17.1408,26.5641 16.4651,26.8555 15.6501,26.88C 14.813,26.8555 14.1151,26.5641 13.5565,26.0059C 12.9979,25.4475 12.7079,24.769 12.6863,23.9701C 12.7079,23.1507 12.9979,22.4662 13.5565,21.9167C 14.1151,21.3671 14.813,21.0815 15.6501,21.06 Z M 15.6501,0C 11.2097,0.105347 7.51904,1.64291 4.57797,4.61276C 1.6369,7.58261 0.110931,11.3527 0,15.9231C 0.110931,20.2214 1.6369,23.8045 4.57797,26.6724C 7.51904,29.5402 11.2097,31.0294 15.6501,31.14C 19.9496,31.0294 23.5613,29.5402 26.4853,26.6724C 29.4093,23.8045 30.9309,20.2214 31.05,15.9231C 30.9309,11.3527 29.4093,7.58264 26.4853,4.61276C 23.5613,1.64291 19.9496,0.105347 15.6501,0 Z " Fill="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"/></TextBlock>
                     <!-- TODO: Add Help Button Here that has the textblock text below-->
                     <TextBlock HorizontalAlignment="Left" Width="400" TextWrapping="Wrap">The root emulators directory should be just above all of your categorized emulator folders. Ie if you have a folder layout "C:\Emulators\N64" "C:\Emulators\Playstation", enter "C:\Emulators\ (trailing slash optional)"</TextBlock>
 
-                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
                         <TextBox x:Name="EmulatorDirectoryTextBox" Width="350" Text="{Binding EmuManagerModel.EmulatorDirectory, Mode=TwoWay}"/>
-                        <Button x:Name="BrowseEmulatorDirectoryButton" Margin="5,0,0,0" Padding="20,0,20,0" FontSize="14">...</Button>
+                        <Button x:Name="BrowseEmulatorDirectoryButton" Margin="5,0,0,0" Padding="20,0,20,0" FontSize="14" Click="BrowseEmulatorDirectoryButton_Click">...</Button>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
-            <Line Stroke="#FF3986B4" Margin="0,10,0,0" StrokeThickness="2" X2="900" />
-            <StackPanel Name="Tasks" HorizontalAlignment="Left" Margin="0,20,0,0">
-                <TextBlock FontSize="14" FontWeight="Medium">Rom Functions</TextBlock>
+            <Line Stroke="#FF3986B4" Margin="0,20,0,0" StrokeThickness="2" X2="900" />
+            <StackPanel Name="Tasks" HorizontalAlignment="Stretch" Margin="0,20,0,0">
+                <TextBlock FontSize="14" FontWeight="Medium">ROM Functions</TextBlock>
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Horizontal" Height="49">
-                        <Button Name="LoadRoms" Padding="5" FontSize="20">Load Roms into GURU</Button>
-                        <Button Name="CleanRoms" Margin="10,0,0,0" Padding="5" FontSize="20">Clean Rom Names</Button>
-                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0">[?]</TextBlock>
+                        <Button Name="LoadRoms" Padding="5" FontSize="16">Load ROMS/Emulators into GURU</Button>
+                        <Button Name="CleanRoms" Margin="10,0,0,0" Padding="5" FontSize="16">Clean Rom Names</Button>
+                        <TextBlock VerticalAlignment="Center" Margin="3,0,0,0"><Path Width="16" Height="16" Stretch="Uniform" Data="F1 M 15.6001,5.22C 17.3822,5.2515 18.82,5.87949 19.9133,7.104C 21.0067,8.32849 21.5689,9.96048 21.6,12C 21.5923,14.7711 20.4267,16.468 18.1031,17.0906L 18.1031,19.2L 13.1146,19.2L 13.1146,14.3069C 13.4637,14.3485 13.7175,14.3652 13.8762,14.3569C 15.7127,14.5413 16.6373,13.7557 16.65,12C 16.6584,10.3585 16.2917,9.5585 15.55,9.59998C 14.7667,9.59198 14.3834,10.392 14.4,12L 9.45001,12C 9.47205,7.54944 11.5221,5.28946 15.6001,5.22 Z M 15.6501,21.06C 16.4651,21.0844 17.1408,21.3759 17.6773,21.9342C 18.2138,22.4926 18.4919,23.1713 18.5118,23.9701C 18.492,24.769 18.2138,25.4475 17.6773,26.0059C 17.1408,26.5641 16.4651,26.8555 15.6501,26.88C 14.813,26.8555 14.1151,26.5641 13.5565,26.0059C 12.9979,25.4475 12.7079,24.769 12.6863,23.9701C 12.7079,23.1507 12.9979,22.4662 13.5565,21.9167C 14.1151,21.3671 14.813,21.0815 15.6501,21.06 Z M 15.6501,0C 11.2097,0.105347 7.51904,1.64291 4.57797,4.61276C 1.6369,7.58261 0.110931,11.3527 0,15.9231C 0.110931,20.2214 1.6369,23.8045 4.57797,26.6724C 7.51904,29.5402 11.2097,31.0294 15.6501,31.14C 19.9496,31.0294 23.5613,29.5402 26.4853,26.6724C 29.4093,23.8045 30.9309,20.2214 31.05,15.9231C 30.9309,11.3527 29.4093,7.58264 26.4853,4.61276C 23.5613,1.64291 19.9496,0.105347 15.6501,0 Z " Fill="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"/></TextBlock>
+
+                        <Button Name="testPack" Margin="10,0,0,0" Padding="5" FontSize="16">Associate Roms With Emulators</Button>
                     </StackPanel>
                 </StackPanel>
-                
+
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock>Roms Loaded: 0</TextBlock>
-                    <CheckBox IsChecked="{Binding EmuManagerModel.AutoImportRoms, Mode=TwoWay}" Margin="30,1,0,0" VerticalAlignment="Center">Automatically load roms on program startup</CheckBox>
+                    <TextBlock>Roms Loaded:</TextBlock>
+                    <TextBlock Text="{Binding EmuManagerModel.RomsLoadedCount}" Margin="5,0,0,0"/>
+                    <CheckBox IsChecked="{Binding EmuManagerModel.AutoImportRoms, Mode=TwoWay}" Margin="35,1,0,0" VerticalAlignment="Center">Automatically load roms on program startup</CheckBox>
+                </StackPanel>
+
+                <StackPanel Name="EmulatorFunctions" Margin="0,10,0,0" HorizontalAlignment="Left">
+                    <TextBlock FontSize="14" FontWeight="Medium">Emulator Functions</TextBlock>
+                    <StackPanel Orientation="Horizontal" Height="49">
+                        <Button Name="DownloadEmulatorPack" Padding="5" FontSize="16">Download Emulator Pack</Button>
+                        <TextBlock VerticalAlignment="Center" Margin="3,0,0,0"><Path Width="16" Height="16" Stretch="Uniform" Data="F1 M 15.6001,5.22C 17.3822,5.2515 18.82,5.87949 19.9133,7.104C 21.0067,8.32849 21.5689,9.96048 21.6,12C 21.5923,14.7711 20.4267,16.468 18.1031,17.0906L 18.1031,19.2L 13.1146,19.2L 13.1146,14.3069C 13.4637,14.3485 13.7175,14.3652 13.8762,14.3569C 15.7127,14.5413 16.6373,13.7557 16.65,12C 16.6584,10.3585 16.2917,9.5585 15.55,9.59998C 14.7667,9.59198 14.3834,10.392 14.4,12L 9.45001,12C 9.47205,7.54944 11.5221,5.28946 15.6001,5.22 Z M 15.6501,21.06C 16.4651,21.0844 17.1408,21.3759 17.6773,21.9342C 18.2138,22.4926 18.4919,23.1713 18.5118,23.9701C 18.492,24.769 18.2138,25.4475 17.6773,26.0059C 17.1408,26.5641 16.4651,26.8555 15.6501,26.88C 14.813,26.8555 14.1151,26.5641 13.5565,26.0059C 12.9979,25.4475 12.7079,24.769 12.6863,23.9701C 12.7079,23.1507 12.9979,22.4662 13.5565,21.9167C 14.1151,21.3671 14.813,21.0815 15.6501,21.06 Z M 15.6501,0C 11.2097,0.105347 7.51904,1.64291 4.57797,4.61276C 1.6369,7.58261 0.110931,11.3527 0,15.9231C 0.110931,20.2214 1.6369,23.8045 4.57797,26.6724C 7.51904,29.5402 11.2097,31.0294 15.6501,31.14C 19.9496,31.0294 23.5613,29.5402 26.4853,26.6724C 29.4093,23.8045 30.9309,20.2214 31.05,15.9231C 30.9309,11.3527 29.4093,7.58264 26.4853,4.61276C 23.5613,1.64291 19.9496,0.105347 15.6501,0 Z " Fill="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"/></TextBlock>
+                    </StackPanel>
                 </StackPanel>
 
                 <StackPanel Name="ShieldFunctions" Margin="0,10,0,0" HorizontalAlignment="Left">
                     <TextBlock FontSize="14" FontWeight="Medium">Steam Link/Shield/Limelight Big Picture Streaming Functions</TextBlock>
                     <StackPanel Orientation="Horizontal">
-                        <Button Name="CheckShieldCompatabilityButton" Height="50" Padding="5" FontSize="20">Check Rom Streaming Compatibility</Button>
-                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0">[?]</TextBlock>
-                        <Button Name="CleanRomsRenameForShieldButton" Margin="5,0,0,0" Padding="5" FontSize="20">Fix Rom Streaming Compatibility</Button>
-                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0">[?]</TextBlock>
+                        <Button Name="CheckShieldCompatabilityButton" Height="50" Padding="5" FontSize="16">Check Streaming Compatibility</Button>
+                        <TextBlock VerticalAlignment="Center" Margin="3,0,0,0"><Path Width="16" Height="16" Stretch="Uniform" Data="F1 M 15.6001,5.22C 17.3822,5.2515 18.82,5.87949 19.9133,7.104C 21.0067,8.32849 21.5689,9.96048 21.6,12C 21.5923,14.7711 20.4267,16.468 18.1031,17.0906L 18.1031,19.2L 13.1146,19.2L 13.1146,14.3069C 13.4637,14.3485 13.7175,14.3652 13.8762,14.3569C 15.7127,14.5413 16.6373,13.7557 16.65,12C 16.6584,10.3585 16.2917,9.5585 15.55,9.59998C 14.7667,9.59198 14.3834,10.392 14.4,12L 9.45001,12C 9.47205,7.54944 11.5221,5.28946 15.6001,5.22 Z M 15.6501,21.06C 16.4651,21.0844 17.1408,21.3759 17.6773,21.9342C 18.2138,22.4926 18.4919,23.1713 18.5118,23.9701C 18.492,24.769 18.2138,25.4475 17.6773,26.0059C 17.1408,26.5641 16.4651,26.8555 15.6501,26.88C 14.813,26.8555 14.1151,26.5641 13.5565,26.0059C 12.9979,25.4475 12.7079,24.769 12.6863,23.9701C 12.7079,23.1507 12.9979,22.4662 13.5565,21.9167C 14.1151,21.3671 14.813,21.0815 15.6501,21.06 Z M 15.6501,0C 11.2097,0.105347 7.51904,1.64291 4.57797,4.61276C 1.6369,7.58261 0.110931,11.3527 0,15.9231C 0.110931,20.2214 1.6369,23.8045 4.57797,26.6724C 7.51904,29.5402 11.2097,31.0294 15.6501,31.14C 19.9496,31.0294 23.5613,29.5402 26.4853,26.6724C 29.4093,23.8045 30.9309,20.2214 31.05,15.9231C 30.9309,11.3527 29.4093,7.58264 26.4853,4.61276C 23.5613,1.64291 19.9496,0.105347 15.6501,0 Z " Fill="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"/></TextBlock>
+                        <Button Name="CleanRomsRenameForShieldButton" Margin="10,0,0,0" Padding="5" FontSize="16">Fix Rom Streaming Compatibility</Button>
+                        <TextBlock VerticalAlignment="Center" Margin="3,0,0,0"><Path Width="16" Height="16" Stretch="Uniform" Data="F1 M 15.6001,5.22C 17.3822,5.2515 18.82,5.87949 19.9133,7.104C 21.0067,8.32849 21.5689,9.96048 21.6,12C 21.5923,14.7711 20.4267,16.468 18.1031,17.0906L 18.1031,19.2L 13.1146,19.2L 13.1146,14.3069C 13.4637,14.3485 13.7175,14.3652 13.8762,14.3569C 15.7127,14.5413 16.6373,13.7557 16.65,12C 16.6584,10.3585 16.2917,9.5585 15.55,9.59998C 14.7667,9.59198 14.3834,10.392 14.4,12L 9.45001,12C 9.47205,7.54944 11.5221,5.28946 15.6001,5.22 Z M 15.6501,21.06C 16.4651,21.0844 17.1408,21.3759 17.6773,21.9342C 18.2138,22.4926 18.4919,23.1713 18.5118,23.9701C 18.492,24.769 18.2138,25.4475 17.6773,26.0059C 17.1408,26.5641 16.4651,26.8555 15.6501,26.88C 14.813,26.8555 14.1151,26.5641 13.5565,26.0059C 12.9979,25.4475 12.7079,24.769 12.6863,23.9701C 12.7079,23.1507 12.9979,22.4662 13.5565,21.9167C 14.1151,21.3671 14.813,21.0815 15.6501,21.06 Z M 15.6501,0C 11.2097,0.105347 7.51904,1.64291 4.57797,4.61276C 1.6369,7.58261 0.110931,11.3527 0,15.9231C 0.110931,20.2214 1.6369,23.8045 4.57797,26.6724C 7.51904,29.5402 11.2097,31.0294 15.6501,31.14C 19.9496,31.0294 23.5613,29.5402 26.4853,26.6724C 29.4093,23.8045 30.9309,20.2214 31.05,15.9231C 30.9309,11.3527 29.4093,7.58264 26.4853,4.61276C 23.5613,1.64291 19.9496,0.105347 15.6501,0 Z " Fill="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"/></TextBlock>
                     </StackPanel>
                 </StackPanel>
 
                 <StackPanel Name="SteamFunctions" Margin="0,10,0,0">
                     <TextBlock FontSize="14" FontWeight="Medium">Steam Functions</TextBlock>
                     <StackPanel Orientation="Horizontal">
-                        <Button Name="CreateSteamShortcutsButton" Padding="5" Foreground="#FFFBFBFB" BorderBrush="#FF030404" Background="#FF2EBB28">Create Steam Rom Shortcuts</Button>
+                        <Button Name="CreateSteamShortcutsButton" Padding="5" Foreground="#FFFBFBFB" BorderBrush="#FF030404" Background="#FF2EBB28" FontSize="16">Create Steam Rom Shortcuts</Button>
                         <StackPanel Height="72">
                             <StackPanel Orientation="Horizontal">
                                 <CheckBox IsChecked="{Binding EmuManagerModel.DownloadGridImages, Mode=TwoWay}" Margin="5,0,0,0">Download Grid Images</CheckBox>
@@ -86,5 +97,16 @@
 
         </StackPanel>
 
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" Background="#FFDEDEDE">
+                <MenuItem Header="File">
+                    <MenuItem Header="Exit"/>
+                </MenuItem>
+                <MenuItem Header="Help">
+                    <MenuItem Header="About..."/>
+                </MenuItem>
+            </Menu>
+            <StackPanel></StackPanel>
+        </DockPanel>
     </Grid>
 </Window>
