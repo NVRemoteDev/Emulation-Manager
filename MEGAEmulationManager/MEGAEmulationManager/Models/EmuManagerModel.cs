@@ -80,6 +80,45 @@ namespace MEGAEmulationManager.Models
             }
         }
 
+        public string RomExtensions
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings.Get("RomExtensions");
+            }
+            set
+            {
+                ConfigurationHelper.SaveConfig("RomExtensions", value);
+                OnPropertyChanged("RomExtensions");
+            }
+        }
+
+        public string Emulators
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings.Get("Emulators");
+            }
+            set
+            {
+                ConfigurationHelper.SaveConfig("Emulators", value);
+                OnPropertyChanged("Emulators");
+            }
+        }
+
+        public string ConsoleAliases
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings.Get("ConsoleAliases");
+            }
+            set
+            {
+                ConfigurationHelper.SaveConfig("ConsoleAliases", value);
+                OnPropertyChanged("ConsoleAliases");
+            }
+        }
+
         private int _romsLoadedCount;
         public string RomsLoadedCount
         {

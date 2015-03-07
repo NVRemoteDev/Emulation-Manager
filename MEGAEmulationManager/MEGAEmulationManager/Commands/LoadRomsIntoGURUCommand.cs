@@ -28,7 +28,7 @@ namespace MEGAEmulationManager.Commands
         {
             if (CanExecute(parameter))
             {
-                _viewModel.LoadRomsIntoGURU();
+                _viewModel.LoadRomsAndEmulatorsIntoGURUAsync();
             }
         }
         #endregion
