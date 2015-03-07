@@ -80,22 +80,19 @@ namespace MEGAEmulationManager.Models
             }
         }
 
-        //public string RomsLoadedCount
-        //{
-        //    get
-        //    {
-        //        if (string.IsNullOrEmpty(RomsLoadedCount))
-        //        {
-        //            return "0";
-        //        }
-        //        return RomsLoadedCount;
-        //    }
-        //    set
-        //    {
-        //        RomsLoadedCount = value;
-        //        OnPropertyChanged("RomsLoadedCount");
-        //    }
-        //}
+        private int _romsLoadedCount;
+        public string RomsLoadedCount
+        {
+            get
+            {
+                return _romsLoadedCount.ToString();
+            }
+            set
+            {
+                _romsLoadedCount = int.Parse(value);
+                OnPropertyChanged("RomsLoadedCount");
+            }
+        }
         #endregion
 
         #region methods
