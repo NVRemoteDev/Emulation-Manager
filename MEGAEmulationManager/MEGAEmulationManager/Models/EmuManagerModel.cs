@@ -93,6 +93,48 @@ namespace MEGAEmulationManager.Models
                 OnPropertyChanged("RomsLoadedCount");
             }
         }
+
+        private int _romDirectoriesLoadedCount;
+        public string RomDirectoriesLoadedCount
+        {
+            get
+            {
+                return _romDirectoriesLoadedCount.ToString();
+            }
+            set
+            {
+                _romDirectoriesLoadedCount = int.Parse(value);
+                OnPropertyChanged("RomDirectoriesLoadedCount");
+            }
+        }
+
+        private int _emulatorDirectoriesLoadedCount;
+        public string EmulatorDirectoriesLoadedCount
+        {
+            get
+            {
+                return _emulatorDirectoriesLoadedCount.ToString();
+            }
+            set
+            {
+                _emulatorDirectoriesLoadedCount = int.Parse(value);
+                OnPropertyChanged("EmulatorDirectoriesLoadedCount");
+            }
+        }
+
+        private int _emulatorsLoadedCount;
+        public string EmulatorsLoadedCount
+        {
+            get
+            {
+                return _emulatorsLoadedCount.ToString();
+            }
+            set
+            {
+                _emulatorsLoadedCount = int.Parse(value);
+                OnPropertyChanged("EmulatorsLoadedCount");
+            }
+        }
         #endregion
 
         #region methods

@@ -69,7 +69,7 @@ namespace MEGAEmulationManager.ViewModels
             ICommand DeleteSteamShortcutsCommand = new DeleteSteamShortcutsCommand(this);
         }
 
-        public void LoadRomsIntoGURU()
+        public async void LoadRomsAndEmulatorsIntoGURUAsync()
         {
             throw new System.NotImplementedException();
         }
