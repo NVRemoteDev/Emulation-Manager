@@ -88,16 +88,12 @@ namespace MEGAEmulationManager.ViewModels
 
         public async void LoadRomsAndEmulatorsIntoGURUAsync()
         {
-            int romCount = await IOHelper.EnumerateRomFiles(EmuManagerModel.RomDirectory);
             int emulatorCount = await IOHelper.EnumerateEmulators(EmuManagerModel.EmulatorDirectory);
-            
-            EmuManagerModel.RomsLoadedCount = romCount.ToString();
             EmuManagerModel.EmulatorsLoadedCount = emulatorCount.ToString();
 
-            foreach (int i in new int[] {1,2,3}) // placeholder stuff obviously
-            {
-                // Populate RomModels and EmulatorModels with the data
-            }
+            RomModels = await IOHelper.GetRomInformationFromDisk(EmuManagerModel.RomDirectory);
+            EmuManagerModel.RomsLoadedCount = RomModels.Length.ToString();
+            string s = "";
         }
 
         public void CleanRomNames()

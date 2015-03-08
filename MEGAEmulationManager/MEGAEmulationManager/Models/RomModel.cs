@@ -12,8 +12,10 @@ namespace MEGAEmulationManager.Models
 
         public string Path { get; set; }
 
-        public string CleanedName { get; set; }
+        public string StreamingCompatibleName { get; set; }
 
-        public EmulatorModel Emulator { get; set; }
+        public string SteamImageUrl { get; set; }
+
+        public string Console { get; set; }
     }
 }

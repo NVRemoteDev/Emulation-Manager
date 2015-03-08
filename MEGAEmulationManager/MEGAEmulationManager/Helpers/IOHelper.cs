@@ -72,5 +72,40 @@ namespace MEGAEmulationManager.Helpers
                 return romCount;
             });
         }
+
+        /// <summary>
+        /// Builds a RomModel for every rom
+        /// </summary>
+        public async static Task<RomModel[]> GetRomInformationFromDisk(string rootRomDirectory)
+        {
+            int romCount = await EnumerateRomFiles(rootRomDirectory);
+            RomModel[] models = new RomModel[romCount];
+            return await Task.Run(() =>
+            {
+                var romExtensionsCSV = new EmuManagerModel().RomExtensions;
+
+                string[] romExtensions = romExtensionsCSV.Split(',');
+
+                int i = 0;
+                foreach (string extension in romExtensions)
+                {
+                    string[] files = System.IO.Directory.GetFiles(rootRomDirectory, "*." + extension, SearchOption.AllDirectories);
+
+                    foreach(string file in files)
+                    {
+                        RomModel model = new RomModel();
+                        model.Path = file;
+                        model.Name = file.Split('\\').Last().Split('.')[0];
+                        model.StreamingCompatibleName = StringHelper.RemoveWhitespace(model.Name);
+
+                        models[i] = model;
+                        ///model.Emulator
+                        i++;
+                    }
+                }
+
+                return models;
+            });
+        }
     }
 }
