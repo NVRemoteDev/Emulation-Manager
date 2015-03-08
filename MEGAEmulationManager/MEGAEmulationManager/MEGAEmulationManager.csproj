@@ -74,7 +74,9 @@
     <Compile Include="Helpers\ConfigurationHelper.cs" />
     <Compile Include="Helpers\IOHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="Models\EmulatorModel.cs" />
     <Compile Include="Models\EmuManagerModel.cs" />
+    <Compile Include="Models\RomModel.cs" />
     <Compile Include="ViewModels\EmuManagerViewModel.cs" />
     <Compile Include="Views\EmuManager.xaml.cs">
       <DependentUpon>EmuManager.xaml</DependentUpon>

@@ -13,6 +13,8 @@ namespace MEGAEmulationManager.ViewModels
     public class EmuManagerViewModel
     {
         public EmuManagerModel EmuManagerModel { get; set; }
+        public EmulatorModel[] EmulatorModels { get; set; }
+        public RomModel[] RomModels { get; set; }
 
         #region ICommands and Related Properties        
         public ICommand LoadRomsIntoGURUCommand { get; private set; }
@@ -91,6 +93,11 @@ namespace MEGAEmulationManager.ViewModels
             
             EmuManagerModel.RomsLoadedCount = romCount.ToString();
             EmuManagerModel.EmulatorsLoadedCount = emulatorCount.ToString();
+
+            foreach (int i in new int[] {1,2,3}) // placeholder stuff obviously
+            {
+                // Populate RomModels and EmulatorModels with the data
+            }
         }
 
         public void CleanRomNames()
