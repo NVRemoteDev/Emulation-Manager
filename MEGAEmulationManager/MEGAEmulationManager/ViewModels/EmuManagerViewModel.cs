@@ -1,4 +1,5 @@
 ﻿using MEGAEmulationManager.Commands;
+using MEGAEmulationManager.Helpers;
 using MEGAEmulationManager.Models;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,7 @@ namespace MEGAEmulationManager.ViewModels
     {
         public EmuManagerModel EmuManagerModel { get; set; }
 
-        #region ICommands and Related Properties
-        public ICommand BrowseRomDirectoryCommand { get; private set; }
-
-        public ICommand BrowseEmulatorDirectoryCommand { get; private set; }
-        
+        #region ICommands and Related Properties        
         public ICommand LoadRomsIntoGURUCommand { get; private set; }
         
         public ICommand CleanRomNamesCommand { get; private set; }
@@ -30,30 +27,48 @@ namespace MEGAEmulationManager.ViewModels
         
         public ICommand DeleteSteamShortcutsCommand { get; private set; }
 
-        //TODO: All of these need actual checks.
+        //TODO: Many of these need more actual checks
         public bool CanLoadRomsIntoGURU 
         { 
-            get { return true; } 
+            get 
+            {
+                return CheckRomAndEmulatorDirectories();
+            } 
         }
         public bool CanCleanRomNames 
         { 
-            get { return true; } 
+            get 
+            {
+                return CheckRomAndEmulatorDirectories();
+            } 
         }
         public bool CanCheckRomStreamingCompatibility 
-        { 
-            get { return true; } 
+        {
+            get
+            {
+                return CheckRomAndEmulatorDirectories();
+            } 
         }
         public bool CanFixRomStreamingCompatibility 
-        { 
-            get { return true; } 
+        {
+            get
+            {
+                return CheckRomAndEmulatorDirectories();
+            }  
         }
         public bool CanCreateSteamShortcuts 
-        { 
-            get { return true; } 
+        {
+            get
+            {
+                return CheckRomAndEmulatorDirectories();
+            } 
         }
         public bool CanDeleteSteamShortcuts 
-        { 
-            get { return true; } 
+        {
+            get
+            {
+                return CheckRomAndEmulatorDirectories();
+            } 
         }
         #endregion
 
@@ -61,17 +76,21 @@ namespace MEGAEmulationManager.ViewModels
         {
             EmuManagerModel = new EmuManagerModel();
 
-            ICommand LoadRomsIntoGURUCommand = new LoadRomsIntoGURUCommand(this);
-            ICommand CleanRomNamesCommand = new CleanRomNamesCommand(this);
-            ICommand CheckRomStreamingCompatibilityCommand = new CheckRomStreamingCompatibilityCommand(this);
-            ICommand FixRomStreamingCompatibilityCommand = new FixRomStreamingCompatibilityCommand(this);
-            ICommand CreateSteamShortcutsCommand = new CreateSteamShortcutsCommand(this);
-            ICommand DeleteSteamShortcutsCommand = new DeleteSteamShortcutsCommand(this);
+            LoadRomsIntoGURUCommand = new LoadRomsIntoGURUCommand(this);
+            CleanRomNamesCommand = new CleanRomNamesCommand(this);
+            CheckRomStreamingCompatibilityCommand = new CheckRomStreamingCompatibilityCommand(this);
+            FixRomStreamingCompatibilityCommand = new FixRomStreamingCompatibilityCommand(this);
+            CreateSteamShortcutsCommand = new CreateSteamShortcutsCommand(this);
+            DeleteSteamShortcutsCommand = new DeleteSteamShortcutsCommand(this);
         }
 
         public async void LoadRomsAndEmulatorsIntoGURUAsync()
         {
-            throw new System.NotImplementedException();
+            int romCount = await IOHelper.EnumerateRomFiles(EmuManagerModel.RomDirectory);
+            int emulatorCount = await IOHelper.EnumerateEmulators(EmuManagerModel.EmulatorDirectory);
+            
+            EmuManagerModel.RomsLoadedCount = romCount.ToString();
+            EmuManagerModel.EmulatorsLoadedCount = emulatorCount.ToString();
         }
 
         public void CleanRomNames()
@@ -97,6 +116,15 @@ namespace MEGAEmulationManager.ViewModels
         public void DeleteSteamShortcuts()
         {
             throw new System.NotImplementedException();
+        }
+
+        public bool CheckRomAndEmulatorDirectories()
+        {
+            if (string.IsNullOrEmpty(EmuManagerModel.RomDirectory) || string.IsNullOrEmpty(EmuManagerModel.EmulatorDirectory))
+            {
+                return false;
+            }
+            return true; 
         }
     }
 }
