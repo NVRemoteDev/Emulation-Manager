@@ -86,5 +86,17 @@ Enter 'C:\Emulators' (trailing slash optional)";
         {
             return MessageBox.Show(helpText, caption, MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
         }
+
+        private void ShowHideAdvancedSettingsTextBlock_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (AdvancedSettingsValues.Visibility == Visibility.Collapsed)
+            {
+                AdvancedSettingsValues.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                AdvancedSettingsValues.Visibility = Visibility.Collapsed;
+            }
+        }
     }
 }
