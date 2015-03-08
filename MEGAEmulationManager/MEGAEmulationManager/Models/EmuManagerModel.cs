@@ -6,7 +6,6 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MEGAEmulationManager.Helpers;
 
 namespace MEGAEmulationManager.Models
 {
@@ -104,6 +103,19 @@ namespace MEGAEmulationManager.Models
             {
                 ConfigurationHelper.SaveConfig("EmulatorAssociations", value);
                 OnPropertyChanged("EmulatorAssociations");
+            }
+        }
+
+        public string Consoles
+        {
+            get
+            {
+                return StringHelper.CleanXmlValues(ConfigurationManager.AppSettings.Get("Consoles"));
+            }
+            set
+            {
+                ConfigurationHelper.SaveConfig("Consoles", value);
+                OnPropertyChanged("Consoles");
             }
         }
 

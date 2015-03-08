@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:MEGAEmulationManager.ViewModels"
-        Title="GURU Emulation Manager w/ Steam Rom Support" Height="860" Width="890" ResizeMode="CanMinimize" Background="#FFF6F6F4" Foreground="#FF010101" BorderBrush="#FFFF1717">
+        Title="GURU Emulation Manager w/ Steam Rom Support" SizeToContent="Height" Width="890" ResizeMode="CanMinimize" Background="#FFF6F6F4" Foreground="#FF010101" BorderBrush="#FFFF1717">
 
     <Window.Resources>
         <local:EmuManagerViewModel x:Key="EMViewModel" />
@@ -97,7 +97,7 @@
                             <TextBox Margin="5,0,0,0" Width="640" Text="{Binding EmuManagerModel.ImageApiUrl, Mode=TwoWay}"></TextBox>
 
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="8,0,0,0">
-                                <TextBlock>%n = console alias (see below), %g = game name</TextBlock>
+                                <TextBlock>%n = console (see below), %g = game name</TextBlock>
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>
@@ -105,13 +105,15 @@
 
                 <StackPanel Name="AdvancedSettings" Margin="0,10,0,0">
                     <TextBlock FontSize="14" FontWeight="Medium">Advanced Settings</TextBlock>
-                    <TextBlock>Only modify these if you know what you're doing.</TextBlock>
+                    <TextBlock Margin="0,0,0,10">Only modify these if you know what you're doing. These can also be edited in the config file in this program's directory.</TextBlock>
 
-                    <TextBlock>Comma separated rom file extensions</TextBlock>
+                    <TextBlock>Rom File Extensions (CSV)</TextBlock>
                     <TextBox Name="RomExtensionsTextBox" Text="{Binding EmuManagerModel.RomExtensions}" TextWrapping="Wrap"/>
-                    <TextBlock>Console aliases</TextBlock>
+                    <TextBlock>Consoles</TextBlock>
+                    <TextBox Name="ConsolesTextBox" Text="{Binding EmuManagerModel.Consoles}" TextWrapping="Wrap"/>
+                    <TextBlock>Consoles AKAs:Consoles Associations</TextBlock>
                     <TextBox Name="ConsoleAliasesTextBox" Text="{Binding EmuManagerModel.ConsoleAliases}" TextWrapping="Wrap"/>
-                    <TextBlock>Emulator to console assocations</TextBlock>
+                    <TextBlock>Console:Emulator Assocations</TextBlock>
                     <TextBox Name="EmulatorConsoleAssociationsTextBox" Text="{Binding EmuManagerModel.EmulatorAssociations}" TextWrapping="Wrap"/>
                 </StackPanel>
             </StackPanel>
