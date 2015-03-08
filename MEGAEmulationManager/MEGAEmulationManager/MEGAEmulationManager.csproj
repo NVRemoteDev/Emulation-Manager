@@ -73,6 +73,7 @@
     <Compile Include="Commands\LoadRomsIntoGURUCommand.cs" />
     <Compile Include="Helpers\ConfigurationHelper.cs" />
     <Compile Include="Helpers\IOHelper.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Models\EmuManagerModel.cs" />
     <Compile Include="ViewModels\EmuManagerViewModel.cs" />
     <Compile Include="Views\EmuManager.xaml.cs">
@@ -108,7 +109,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MEGAEmulationManager.Helpers;
 
 namespace MEGAEmulationManager.Models
 {
@@ -84,7 +85,7 @@ namespace MEGAEmulationManager.Models
         {
             get
             {
-                return ConfigurationManager.AppSettings.Get("RomExtensions");
+                return StringHelper.CleanXmlValues(ConfigurationManager.AppSettings.Get("RomExtensions"));
             }
             set
             {
@@ -93,16 +94,16 @@ namespace MEGAEmulationManager.Models
             }
         }
 
-        public string Emulators
+        public string EmulatorAssociations
         {
             get
             {
-                return ConfigurationManager.AppSettings.Get("Emulators");
+                return StringHelper.CleanXmlValues(ConfigurationManager.AppSettings.Get("EmulatorAssociations"));
             }
             set
             {
-                ConfigurationHelper.SaveConfig("Emulators", value);
-                OnPropertyChanged("Emulators");
+                ConfigurationHelper.SaveConfig("EmulatorAssociations", value);
+                OnPropertyChanged("EmulatorAssociations");
             }
         }
 
@@ -110,7 +111,7 @@ namespace MEGAEmulationManager.Models
         {
             get
             {
-                return ConfigurationManager.AppSettings.Get("ConsoleAliases");
+                return StringHelper.CleanXmlValues(ConfigurationManager.AppSettings.Get("ConsoleAliases"));
             }
             set
             {
