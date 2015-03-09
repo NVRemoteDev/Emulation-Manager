@@ -17,7 +17,7 @@ namespace EmulationManager.ViewModels
         public RomModel[] RomModels { get; set; }
 
         #region ICommands and Related Properties        
-        public ICommand LoadRomsIntoGURUCommand { get; private set; }
+        public ICommand LoadRomsAndEmulatorsCommand { get; private set; }
         
         public ICommand CleanRomNamesCommand { get; private set; }
         
@@ -30,7 +30,7 @@ namespace EmulationManager.ViewModels
         public ICommand DeleteSteamShortcutsCommand { get; private set; }
 
         //TODO: Many of these need more actual checks
-        public bool CanLoadRomsIntoGURU 
+        public bool CanLoadRomsAndEmulators
         { 
             get 
             {
@@ -78,7 +78,7 @@ namespace EmulationManager.ViewModels
         {
             EmuManagerModel = new EmuManagerModel();
 
-            LoadRomsIntoGURUCommand = new LoadRomsIntoGURUCommand(this);
+            LoadRomsAndEmulatorsCommand = new LoadRomsAndEmulatorsCommand(this);
             CleanRomNamesCommand = new CleanRomNamesCommand(this);
             CheckRomStreamingCompatibilityCommand = new CheckRomStreamingCompatibilityCommand(this);
             FixRomStreamingCompatibilityCommand = new FixRomStreamingCompatibilityCommand(this);
@@ -86,7 +86,7 @@ namespace EmulationManager.ViewModels
             DeleteSteamShortcutsCommand = new DeleteSteamShortcutsCommand(this);
         }
 
-        public async void LoadRomsAndEmulatorsIntoGURUAsync()
+        public async void LoadRomsAndEmulatorsAsync()
         {
             int emulatorCount = await IOHelper.EnumerateEmulators(EmuManagerModel.EmulatorDirectory);
             EmuManagerModel.EmulatorsLoadedCount = emulatorCount.ToString();

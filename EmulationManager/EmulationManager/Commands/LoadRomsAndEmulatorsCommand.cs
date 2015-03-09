@@ -8,10 +8,10 @@ using System.Windows.Input;
 
 namespace EmulationManager.Commands
 {
-    public class LoadRomsIntoGURUCommand : ICommand
+    public class LoadRomsAndEmulatorsCommand : ICommand
     {
         private EmuManagerViewModel _viewModel;
-        public LoadRomsIntoGURUCommand(EmuManagerViewModel viewModel)
+        public LoadRomsAndEmulatorsCommand(EmuManagerViewModel viewModel)
         {
             _viewModel = viewModel;
         }
@@ -19,7 +19,7 @@ namespace EmulationManager.Commands
         #region ICommand Members
         public bool CanExecute(object parameter)
         {
-            return _viewModel.CanLoadRomsIntoGURU;
+            return _viewModel.CanLoadRomsAndEmulators;
         }
 
         public event EventHandler CanExecuteChanged { add { } remove { } }
@@ -28,7 +28,7 @@ namespace EmulationManager.Commands
         {
             if (CanExecute(parameter))
             {
-                _viewModel.LoadRomsAndEmulatorsIntoGURUAsync();
+                _viewModel.LoadRomsAndEmulatorsAsync();
             }
         }
         #endregion

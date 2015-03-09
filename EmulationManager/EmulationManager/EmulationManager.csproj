@@ -86,7 +86,7 @@
     <Compile Include="Commands\CreateSteamShortcutsCommand.cs" />
     <Compile Include="Commands\DeleteSteamShortcutsCommand.cs" />
     <Compile Include="Commands\FixRomStreamingCompatibilityCommand.cs" />
-    <Compile Include="Commands\LoadRomsIntoGURUCommand.cs" />
+    <Compile Include="Commands\LoadRomsAndEmulatorsCommand.cs" />
     <Compile Include="Helpers\ConfigurationHelper.cs" />
     <Compile Include="Helpers\IOHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
