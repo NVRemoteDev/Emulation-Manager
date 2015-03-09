@@ -1,4 +1,4 @@
-﻿using MEGAEmulationManager.Helpers;
+﻿using EmulationManager.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MEGAEmulationManager.Models
+namespace EmulationManager.Models
 {
     public class EmuManagerModel : INotifyPropertyChanged
     {

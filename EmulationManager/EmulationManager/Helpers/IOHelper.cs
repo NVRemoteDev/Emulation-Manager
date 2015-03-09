@@ -1,4 +1,4 @@
-﻿using MEGAEmulationManager.Models;
+﻿using EmulationManager.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MEGAEmulationManager.Helpers
+namespace EmulationManager.Helpers
 {
     public static class IOHelper
     {

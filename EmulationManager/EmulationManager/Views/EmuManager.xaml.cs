@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Ookii.Dialogs.Wpf;
 
-namespace MEGAEmulationManager
+namespace EmulationManager
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

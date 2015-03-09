@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MEGAEmulationManager.Helpers
+namespace EmulationManager.Helpers
 {
     public static class ConfigurationHelper
     {

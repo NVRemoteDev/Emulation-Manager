@@ -1,6 +1,6 @@
-﻿using MEGAEmulationManager.Commands;
-using MEGAEmulationManager.Helpers;
-using MEGAEmulationManager.Models;
+﻿using EmulationManager.Commands;
+using EmulationManager.Helpers;
+using EmulationManager.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MEGAEmulationManager.ViewModels
+namespace EmulationManager.ViewModels
 {
     public class EmuManagerViewModel
     {
