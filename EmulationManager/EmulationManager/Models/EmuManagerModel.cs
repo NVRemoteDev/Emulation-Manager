@@ -132,6 +132,32 @@ namespace EmulationManager.Models
             }
         }
 
+        public string EmulatorLaunchParams
+        {
+            get
+            {
+                return StringHelper.CleanXmlValues(ConfigurationManager.AppSettings.Get("EmulatorLaunchParams"));
+            }
+            set
+            {
+                ConfigurationHelper.SaveConfig("EmulatorLaunchParams", value);
+                OnPropertyChanged("EmulatorLaunchParams");
+            }
+        }
+
+        public string SteamDirectory
+        {
+            get
+            {
+                return StringHelper.CleanXmlValues(ConfigurationManager.AppSettings.Get("SteamDirectory"));
+            }
+            set
+            {
+                ConfigurationHelper.SaveConfig("SteamDirectory", value);
+                OnPropertyChanged("SteamDirectory");
+            }
+        }
+
         private int _romsLoadedCount;
         public string RomsLoadedCount
         {

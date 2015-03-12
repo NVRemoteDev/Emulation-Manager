@@ -98,5 +98,25 @@ Enter 'C:\Emulators' (trailing slash optional)";
                 AdvancedSettingsValues.Visibility = Visibility.Collapsed;
             }
         }
+
+        private void DeleteSteamShortcutsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Really delete the current Steam shortcuts? This action will affect all of your custom Steam categorization, not just Roms.", 
+                "Shortcuts Deletion Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning, MessageBoxResult.Cancel);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                // Delete shortcuts, preferably via ViewModel
+            }
+        }
+
+        private void BrowseSteam_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new VistaFolderBrowserDialog();
+            if (dialog.ShowDialog() == true)
+            {
+                SteamDirectoryTextBox.Text = dialog.SelectedPath;
+            }
+        }
     }
 }

@@ -89,6 +89,7 @@
     <Compile Include="Commands\LoadRomsAndEmulatorsCommand.cs" />
     <Compile Include="Helpers\ConfigurationHelper.cs" />
     <Compile Include="Helpers\IOHelper.cs" />
+    <Compile Include="Helpers\SteamHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Models\EmulatorModel.cs" />
     <Compile Include="Models\EmuManagerModel.cs" />
@@ -125,7 +126,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Readme.html">
