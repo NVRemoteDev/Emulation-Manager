@@ -159,6 +159,20 @@ namespace EmulationManager.Models
                 OnPropertyChanged("EmulatorsLoadedCount");
             }
         }
+
+        private int _consolesWithRomsCount;
+        public string ConsolesWithRomsCount
+        {
+            get
+            {
+                return _consolesWithRomsCount.ToString();
+            }
+            set
+            {
+                _consolesWithRomsCount = int.Parse(value);
+                OnPropertyChanged("ConsolesWithRomsCount");
+            }
+        }
         #endregion
 
         #region methods

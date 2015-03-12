@@ -1,6 +1,7 @@
 ﻿using EmulationManager.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -17,33 +18,30 @@ namespace EmulationManager.Helpers
         /// </summary>
         /// <param name="directory"></param>
         /// <returns>Emulator count</returns>
-        public async static Task<int> EnumerateEmulators(string rootEmuDirectory)
+        public static int EnumerateEmulators(string rootEmuDirectory)
         {
-            return await Task.Run(() =>
+            string[] emulatorConsoleAssociations = new EmuManagerModel().EmulatorAssociations.Split(';');
+
+            int emulatorCount = 0;
+            foreach (string association in emulatorConsoleAssociations)
             {
-                string[] emulatorConsoleAssociations = new EmuManagerModel().EmulatorAssociations.Split(';');
-
-                int emulatorCount = 0;
-                foreach (string association in emulatorConsoleAssociations)
+                try
                 {
-                    try
-                    {
-                        // EX association: PS1:ePSXe.exe
-                        string emulator = association.Split(':')[1];
+                    // EX association: PS1:ePSXe.exe
+                    string emulator = association.Split(':')[1];
 
-                        string[] files = System.IO.Directory.GetFiles(rootEmuDirectory, emulator, SearchOption.AllDirectories);
+                    string[] files = System.IO.Directory.GetFiles(rootEmuDirectory, emulator, SearchOption.AllDirectories);
 
-                        emulatorCount += files.Length;
-                    }
-                    catch (NullReferenceException)
-                    {
-                        // This would mean an improperly formatted emulator association was present if hit
-                        continue;
-                    }
+                    emulatorCount += files.Length;
                 }
+                catch (NullReferenceException)
+                {
+                    // This would mean an improperly formatted emulator association was present if hit
+                    continue;
+                }
+            }
 
-                return emulatorCount;
-            });
+            return emulatorCount;
         }
 
         /// <summary>
@@ -53,59 +51,128 @@ namespace EmulationManager.Helpers
         /// </summary>
         /// <param name="rootRomDirectory"></param>
         /// <returns>ROM file count</returns>
-        public async static Task<int> EnumerateRomFiles(string rootRomDirectory)
+        public static int EnumerateRomFiles(string rootRomDirectory)
         {
-            return await Task.Run(() =>
+            var romExtensionsCSV = new EmuManagerModel().RomExtensions;
+
+            string[] romExtensions = romExtensionsCSV.Split(',');
+
+            int romCount = 0;
+            foreach (string extension in romExtensions)
             {
-                var romExtensionsCSV = new EmuManagerModel().RomExtensions;
+                string[] files = System.IO.Directory.GetFiles(rootRomDirectory, "*." + extension, SearchOption.AllDirectories);
 
-                string[] romExtensions = romExtensionsCSV.Split(',');
-
-                int romCount = 0;
-                foreach (string extension in romExtensions)
-                {
-                    string[] files = System.IO.Directory.GetFiles(rootRomDirectory, "*." + extension, SearchOption.AllDirectories);
-
-                    romCount += files.Length;
-                }
+                romCount += files.Length;
+            }
                 
-                return romCount;
-            });
+            return romCount;
+        }
+
+        /// <summary>
+        /// Builds a EmulatorModel for every rom
+        /// </summary>
+        public static EmulatorModel[] GetEmulatorInformationFromDisk(string rootEmuDirectory)
+        {
+            EmulatorModel[] models = new EmulatorModel[EnumerateEmulators(rootEmuDirectory)];
+
+            string[] emulatorConsoleAssociations = new EmuManagerModel().EmulatorAssociations.Split(';');
+
+            int i = 0;
+            foreach (string association in emulatorConsoleAssociations)
+            {
+                try
+                {
+                    // EX association: PS1:ePSXe.exe
+                    string emulator = association.Split(':')[1];
+
+                    string[] files = System.IO.Directory.GetFiles(rootEmuDirectory, emulator, SearchOption.AllDirectories);
+                    foreach (string file in files)
+                    {
+                        EmulatorModel model = new EmulatorModel();
+                        model.BinaryPath = file;
+                        model.Console = association.Split(':')[0];
+
+                        models[i] = model;
+                        i++;
+                    }
+                }
+                catch (NullReferenceException)
+                {
+                    // This would mean an improperly formatted emulator association was present if hit
+                    continue;
+                }
+            }
+
+            return models;
         }
 
         /// <summary>
         /// Builds a RomModel for every rom
         /// </summary>
-        public async static Task<RomModel[]> GetRomInformationFromDisk(string rootRomDirectory)
+        public static RomModel[] GetRomInformationFromDisk(string rootRomDirectory)
         {
-            int romCount = await EnumerateRomFiles(rootRomDirectory);
-            RomModel[] models = new RomModel[romCount];
-            return await Task.Run(() =>
+            string consoleAliases = ConfigurationManager.AppSettings.Get("ConsoleAliases");
+
+            RomModel[] models = new RomModel[EnumerateRomFiles(rootRomDirectory)];
+            string[] romExtensions = new EmuManagerModel().RomExtensions.Split(',');
+            
+            //TODO: We probably want to take a look at the nesting here
+            int x = 0;
+            foreach (string extension in romExtensions)
             {
-                var romExtensionsCSV = new EmuManagerModel().RomExtensions;
-
-                string[] romExtensions = romExtensionsCSV.Split(',');
-
-                int i = 0;
-                foreach (string extension in romExtensions)
+                string[] files = System.IO.Directory.GetFiles(rootRomDirectory, "*." + extension, SearchOption.AllDirectories);
+                for (int i = 0; i < files.Length; i++)
                 {
-                    string[] files = System.IO.Directory.GetFiles(rootRomDirectory, "*." + extension, SearchOption.AllDirectories);
+                    models[x] = PopulateRomModelFromRomPathRomFileName(files[i], consoleAliases);
+                    x++;
+                }
+            }
 
-                    foreach(string file in files)
+            return models;
+        }
+
+        /// <summary>
+        /// Populates a rom model for a given rom file and the console aliases from the config file
+        /// </summary>
+        /// <param name="file">Rom File (with full path)</param>
+        /// <param name="consoleAliases">Console Aliases (from app.config)</param>
+        /// <returns>Rom Model</returns>
+        private static RomModel PopulateRomModelFromRomPathRomFileName(string file, string consoleAliases)
+        {
+            string[] filePathParts = file.Split('\\');
+
+            RomModel model = new RomModel();
+            model.Path = file;
+            model.Name = filePathParts.Last().Split('.')[0];
+            model.StreamingCompatibleName = StringHelper.RemoveWhitespace(model.Name);
+
+            string consoles = ConfigurationManager.AppSettings.Get("Consoles");
+            
+            // [length - 1] because the length index would be the file name
+            int length = filePathParts.Length - 1;
+            while (length >= 0)
+            {
+                string testFolder = filePathParts[length];
+                if (consoles.Contains(testFolder))
+                {
+                    model.Console = testFolder;
+                    break;
+                }
+                else if (consoleAliases.Contains(testFolder))
+                {
+                    foreach (string consoleAlias in consoleAliases.Split(';'))
                     {
-                        RomModel model = new RomModel();
-                        model.Path = file;
-                        model.Name = file.Split('\\').Last().Split('.')[0];
-                        model.StreamingCompatibleName = StringHelper.RemoveWhitespace(model.Name);
-
-                        models[i] = model;
-                        ///model.Emulator
-                        i++;
+                        if (consoleAlias.Contains(testFolder))
+                        {
+                            model.Console = consoleAlias.Split(':')[1];
+                            break;
+                        }
                     }
                 }
+                length--;
+            }
 
-                return models;
-            });
+            return model;
         }
     }
 }

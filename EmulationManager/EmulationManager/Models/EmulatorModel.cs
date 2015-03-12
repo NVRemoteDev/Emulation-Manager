@@ -36,25 +36,16 @@ namespace EmulationManager.Models
             {
                 if (!string.IsNullOrEmpty(BinaryPath))
                 {
-                    string options = StringHelper.CleanXmlValues(ConfigurationManager.AppSettings.Get("EmulatorLaunchParams"));
-                    string[] optionsArray = options.Split(';');
-
-                    string launchOption = "";
-                    foreach (var option in optionsArray)
+                    string[] launchParams = StringHelper.CleanXmlValues(ConfigurationManager.AppSettings.Get("EmulatorLaunchParams")).Split(';');
+                    for (int i = 0; i < launchParams.Length; i++)
                     {
-                        if (option.Contains(Name))
+                        if (launchParams[i].Contains(Console))
                         {
-                            launchOption = option.Split(':')[1];
+                            return launchParams[i].Split(':')[1];
                         }
                     }
-
-                    return launchOption;
                 }
                 return "";
-            }
-            set
-            {
-                ConfigurationHelper.SaveConfig("ConsoleAliases", value);
             }
         }
 
@@ -62,7 +53,9 @@ namespace EmulationManager.Models
         {
             get
             {
-                return BinaryPath + " " + LaunchParams;
+                string launchParams = "";
+                launchParams = LaunchParams.Replace("%g", "\"%g\"");
+                return "\"" + BinaryPath + "\"" + " " + launchParams;
             }
         }
     }

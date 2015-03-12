@@ -6,12 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace EmulationManager.ViewModels
 {
     public class EmuManagerViewModel
     {
+        protected Dispatcher dispatcher = Application.Current.Dispatcher;
+
         public EmuManagerModel EmuManagerModel { get; set; }
         public EmulatorModel[] EmulatorModels { get; set; }
         public RomModel[] RomModels { get; set; }
@@ -86,14 +90,18 @@ namespace EmulationManager.ViewModels
             DeleteSteamShortcutsCommand = new DeleteSteamShortcutsCommand(this);
         }
 
-        public async void LoadRomsAndEmulatorsAsync()
+        public async Task LoadRomsAndEmulatorsAsync()
         {
-            int emulatorCount = await IOHelper.EnumerateEmulators(EmuManagerModel.EmulatorDirectory);
-            EmuManagerModel.EmulatorsLoadedCount = emulatorCount.ToString();
+            // The methods below lock up the UI thread. Take it this off the UI thread.
+            await Task.Run(() =>
+            {
+                EmulatorModels = IOHelper.GetEmulatorInformationFromDisk(EmuManagerModel.EmulatorDirectory);
+                RomModels = IOHelper.GetRomInformationFromDisk(EmuManagerModel.RomDirectory);
+            });
 
-            RomModels = await IOHelper.GetRomInformationFromDisk(EmuManagerModel.RomDirectory);
             EmuManagerModel.RomsLoadedCount = RomModels.Length.ToString();
-            string s = "";
+            EmuManagerModel.EmulatorsLoadedCount = EmulatorModels.Length.ToString();
+            EmuManagerModel.ConsolesWithRomsCount = RomModels.GroupBy(x => x.Console).ToList().Count.ToString();
         }
 
         public void CleanRomNames()
