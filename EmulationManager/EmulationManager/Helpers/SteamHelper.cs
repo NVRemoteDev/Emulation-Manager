@@ -10,6 +10,8 @@ namespace EmulationManager.Helpers
 {
     public static class SteamHelper
     {
+        
+
         public static void WriteSteamShortcuts(RomModel[] roms, EmulatorModel[] emulators)
         {
             string shortcutsHeader = "\00shortcuts\00";
@@ -24,20 +26,31 @@ namespace EmulationManager.Helpers
 
                 foreach(var rom in query.ToList())
                 {
-                    shortcutsBody += "\00" + shortcutNumber.ToString() + "\01AppName\00" + rom.Name + "\00";
-                    shortcutsBody += "\01Exe\00" + emulator.FullCommandLineLaunch.Replace("%g", rom.Path) + "\00";
-                    shortcutsBody += "\01StartDir\00" + emulator.StartDirectory + "\00";
-                    shortcutsBody += "\01icon\00\00";
-                    shortcutsBody += "\00tags\00\01" + 0.ToString() + "\00" + "Powered by GURU Emulation Manager";
-                    shortcutsBody += "\01" + 0.ToString() + "\00" + emulator.Console + "\00\00";
+                    shortcutsBody += "\x0" + shortcutNumber.ToString();
+                    shortcutsBody += GenerateKeyValuePair("AppName", rom.Name);
+                    shortcutsBody += GenerateKeyValuePair("Exe", emulator.FullCommandLineLaunch.Replace("%g", rom.Path));
+                    shortcutsBody += GenerateKeyValuePair("StartDir", emulator.StartDirectory);
+                    shortcutsBody += GenerateKeyValuePair("icon", emulator.StartDirectory);
+                    shortcutsBody += GenerateTags();
+                    shortcutsBody += "\x01" + 0.ToString() + "\x0" + emulator.Console + "\x0\x0";
                     shortcutsBody += "\b\b";
 
                     shortcutNumber++;
                 }
             }
-            string shortcutsFooter = "\b\b";
+            string shortcutsFooter = "\b\b\n";
 
             WriteShortcutFile(shortcutsHeader + shortcutsBody + shortcutsFooter);
+        }
+
+        private static string GenerateKeyValuePair(string key, string value)
+        {
+             return "\x01" + key + "\x0" + value + "\x0"; 
+        }
+
+        private static string GenerateTags()
+        {
+            return "\x0" + "tags" + "\x0" + "\x01" + 0.ToString() + "\x0" + "Powered by GURU Emulation Manager" + "\x0";
         }
 
         private static void WriteShortcutFile(string shortcutText)
