@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,21 @@ namespace EmulationManager.Models
         /// Path to the emulator executable
         /// </summary>
         public string BinaryPath { get; set; }
+
+        /// <summary>
+        /// Emulator directory
+        /// </summary>
+        public string StartDirectory
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(BinaryPath))
+                {
+                    return Path.GetDirectoryName(BinaryPath);
+                }
+                return "";
+            }
+        }
 
         /// <summary>
         /// Console this emulator is for (alias)
@@ -48,6 +64,7 @@ namespace EmulationManager.Models
                 return "";
             }
         }
+
 
         public string FullCommandLineLaunch
         {

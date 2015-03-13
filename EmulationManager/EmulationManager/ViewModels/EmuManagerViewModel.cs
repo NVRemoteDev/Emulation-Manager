@@ -67,6 +67,7 @@ namespace EmulationManager.ViewModels
             get
             {
                 return CheckRomAndEmulatorDirectories();
+                    //TODO: && EmulatorModels != null && RomModels != null;
             } 
         }
         public bool CanDeleteSteamShortcuts 
@@ -121,7 +122,7 @@ namespace EmulationManager.ViewModels
 
         public void CreateSteamShortcuts()
         {
-            throw new System.NotImplementedException();
+            SteamHelper.WriteSteamShortcuts(RomModels, EmulatorModels);
         }
 
         public void DeleteSteamShortcuts()

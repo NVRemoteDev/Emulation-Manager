@@ -76,10 +76,10 @@
                 <StackPanel Name="SteamFunctions" Margin="0,15,0,0">
                     <TextBlock FontSize="14" FontWeight="Medium">Steam Functions</TextBlock>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <Button Name="CreateSteamShortcutsButton" Padding="3" Foreground="#FFFBFBFB" BorderBrush="#FF030404" Background="#FF2EBB28" FontSize="16">Create Steam Rom Shortcuts</Button>
+                        <Button Name="CreateSteamShortcutsButton" Padding="3" Foreground="#FFFBFBFB" Command="{Binding CreateSteamShortcutsCommand}" BorderBrush="#FF030404" Background="#FF2EBB28" FontSize="16">Create Steam Rom Shortcuts</Button>
                         <StackPanel Height="72">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <TextBlock Margin="5,5,360,0" FontSize="14" FontWeight="Medium">Steam Directory</TextBlock>
+                                <TextBlock Margin="5,5,365,0" FontSize="14" FontWeight="Medium">Steam Directory</TextBlock>
                                 <Button Name="DeleteSteamShortcutsButton" Width="150" VerticalAlignment="Top" Margin="-10,0,0,0" Background="#FFE00E0E" Foreground="White" Click="DeleteSteamShortcutsButton_Click">Delete Steam Shortcuts</Button>
                             </StackPanel>
                             
