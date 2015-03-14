@@ -14,7 +14,7 @@ namespace EmulationManager.Helpers
 
         public static void WriteSteamShortcuts(RomModel[] roms, EmulatorModel[] emulators)
         {
-            string shortcutsHeader = "\00shortcuts\00";
+            string shortcutsHeader = "\x0shortcuts\x0";
 
             string shortcutsBody = "";
             int shortcutNumber = 0;
@@ -26,19 +26,18 @@ namespace EmulationManager.Helpers
 
                 foreach(var rom in query.ToList())
                 {
-                    shortcutsBody += "\x0" + shortcutNumber.ToString();
+                    shortcutsBody += "\x0" + shortcutNumber.ToString() + "\x0";
                     shortcutsBody += GenerateKeyValuePair("AppName", rom.Name);
                     shortcutsBody += GenerateKeyValuePair("Exe", emulator.FullCommandLineLaunch.Replace("%g", rom.Path));
                     shortcutsBody += GenerateKeyValuePair("StartDir", emulator.StartDirectory);
-                    shortcutsBody += GenerateKeyValuePair("icon", emulator.StartDirectory);
-                    shortcutsBody += GenerateTags();
-                    shortcutsBody += "\x01" + 0.ToString() + "\x0" + emulator.Console + "\x0\x0";
+                    shortcutsBody += GenerateKeyValuePair("icon", "");
+                    shortcutsBody += GenerateTags(emulator.Console);
                     shortcutsBody += "\b\b";
 
                     shortcutNumber++;
                 }
             }
-            string shortcutsFooter = "\b\b\n";
+            string shortcutsFooter = "\b\b";
 
             WriteShortcutFile(shortcutsHeader + shortcutsBody + shortcutsFooter);
         }
@@ -48,14 +47,20 @@ namespace EmulationManager.Helpers
              return "\x01" + key + "\x0" + value + "\x0"; 
         }
 
-        private static string GenerateTags()
+        private static string GenerateTags(string console)
         {
-            return "\x0" + "tags" + "\x0" + "\x01" + 0.ToString() + "\x0" + "Powered by GURU Emulation Manager" + "\x0";
+            return "\x0" + "tags" + "\x0" + "\x01" + 0.ToString() + "\x0" + console + "\x0";
         }
 
         private static void WriteShortcutFile(string shortcutText)
         {
-            File.WriteAllText(@"C:\Program Files (x86)\Steam\userdata\31025313\config\shortcuts.vdf", shortcutText);
+            string steamDirectory = new EmuManagerModel().SteamDirectory;
+
+            steamDirectory = steamDirectory + @"\userdata\";
+            foreach (var directory in Directory.EnumerateDirectories(steamDirectory))
+            {
+                File.WriteAllText(directory + @"config\shortcuts.vdf", shortcutText);
+            }
         }
     }
 }
