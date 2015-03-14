@@ -106,7 +106,7 @@ Enter 'C:\Emulators' (trailing slash optional)";
 
             if (result == MessageBoxResult.Yes)
             {
-                // Delete shortcuts, preferably via ViewModel
+                //TODO: Delete shortcuts
             }
         }
 
@@ -116,6 +116,46 @@ Enter 'C:\Emulators' (trailing slash optional)";
             if (dialog.ShowDialog() == true)
             {
                 SteamDirectoryTextBox.Text = dialog.SelectedPath;
+            }
+        }
+
+        private void CreateSteamShortcutsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Create Steam shortcuts? This feature will currently override your current Steam Shortcuts.",
+                "Create Steam Shortcuts Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning, MessageBoxResult.Cancel);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                var viewModel = mainGrid.DataContext as EmulationManager.ViewModels.EmuManagerViewModel;
+                if (viewModel.CreateSteamShortcutsCommand.CanExecute(null))
+                {
+                    viewModel.CreateSteamShortcutsCommand.Execute(null);
+                    MessageBox.Show("Your Steam shortcuts have been created. Restart or load Steam.");
+                }
+                else
+                {
+                    MessageBox.Show("Unable to execute command. Did you load Roms and Emulators?");
+                }
+            }
+        }
+
+        private void FixRomsForStreamingCompatibilityButton_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("This will rename your rom files permanently, removing spaces. This is recommended for streaming. Proceed?",
+                "Rename Roms Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning, MessageBoxResult.Cancel);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                var viewModel = mainGrid.DataContext as EmulationManager.ViewModels.EmuManagerViewModel;
+                if (viewModel.FixRomStreamingCompatibilityCommand.CanExecute(null))
+                {
+                    viewModel.FixRomStreamingCompatibilityCommand.Execute(null);
+                    MessageBox.Show("Your roms have been renamed. You may now create the Steam shortcuts.");
+                }
+                else
+                {
+                    MessageBox.Show("Unable to execute command. Did you load Roms and Emulators?");
+                }
             }
         }
     }

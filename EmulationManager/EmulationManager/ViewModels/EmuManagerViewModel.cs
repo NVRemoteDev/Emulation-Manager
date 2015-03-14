@@ -67,7 +67,6 @@ namespace EmulationManager.ViewModels
             get
             {
                 return CheckRomAndEmulatorDirectories();
-                    //TODO: && EmulatorModels != null && RomModels != null;
             } 
         }
         public bool CanDeleteSteamShortcuts 
@@ -120,9 +119,16 @@ namespace EmulationManager.ViewModels
             throw new System.NotImplementedException();
         }
 
-        public void CreateSteamShortcuts()
+        public async Task CreateSteamShortcutsAsync()
         {
-            SteamHelper.WriteSteamShortcuts(RomModels, EmulatorModels);
+            if (EmulatorModels != null && EmulatorModels.Length > 0 && RomModels != null && RomModels.Length > 0)
+            {
+                await LoadRomsAndEmulatorsAsync();
+            }
+            if (EmulatorModels != null && EmulatorModels.Length > 0 && RomModels != null && RomModels.Length > 0)
+            {
+                SteamHelper.WriteSteamShortcuts(RomModels, EmulatorModels);
+            }
         }
 
         public void DeleteSteamShortcuts()
