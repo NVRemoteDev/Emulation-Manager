@@ -10,8 +10,6 @@ namespace EmulationManager.Helpers
 {
     public static class SteamHelper
     {
-        
-
         public static void WriteSteamShortcuts(RomModel[] roms, EmulatorModel[] emulators)
         {
             string shortcutsHeader = "\x0shortcuts\x0";
@@ -59,7 +57,7 @@ namespace EmulationManager.Helpers
             steamDirectory = steamDirectory + @"\userdata\";
             foreach (var directory in Directory.EnumerateDirectories(steamDirectory))
             {
-                File.WriteAllText(directory + @"config\shortcuts.vdf", shortcutText);
+                File.WriteAllText(directory + @"\config\shortcuts.vdf", shortcutText);
             }
         }
     }
