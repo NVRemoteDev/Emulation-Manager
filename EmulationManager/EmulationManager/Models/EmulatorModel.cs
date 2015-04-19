@@ -65,7 +65,11 @@ namespace EmulationManager.Models
             }
         }
 
-
+        /// <summary>
+        /// Use this for the actual rom shortcut creation as it adds quotes for proper execution in Steam
+        /// 
+        /// i.e.: C:\Program Files\Foo\bar.exe -g %g returns as "C:\Program Files\Foo\foo.exe" -g "%g"
+        /// </summary>
         public string FullCommandLineLaunch
         {
             get
