@@ -92,7 +92,7 @@ namespace EmulationManager.ViewModels
 
         public async Task LoadRomsAndEmulatorsAsync()
         {
-            // The methods below lock up the UI thread. Take it this off the UI thread.
+            // Use a Task.Run() here to get these methods off the UI thread as they're slow and it will lock up responsiveness.
             await Task.Run(() =>
             {
                 EmulatorModels = IOHelper.GetEmulatorInformationFromDisk(EmuManagerModel.EmulatorDirectory);
