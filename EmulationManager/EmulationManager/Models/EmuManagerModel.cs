@@ -6,10 +6,11 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EmulationManager.Common;
 
 namespace EmulationManager.Models
 {
-    public class EmuManagerModel : INotifyPropertyChanged
+    public class EmuManagerModel : NotifierBase
     {
         public EmuManagerModel()
         { }
@@ -24,7 +25,7 @@ namespace EmulationManager.Models
             set
             {
                 ConfigurationHelper.SaveConfig("AutoImportRoms", value);
-                OnPropertyChanged("AutoImportRoms");
+                OnPropertyChanged();
             }
         }
 
@@ -37,7 +38,7 @@ namespace EmulationManager.Models
             set
             {
                 ConfigurationHelper.SaveConfig("DownloadGridImages", value);
-                OnPropertyChanged("DownloadGridImages");
+                OnPropertyChanged();
             }
         }
 
@@ -50,7 +51,7 @@ namespace EmulationManager.Models
             set
             {
                 ConfigurationHelper.SaveConfig("ImageApiUrl", value);
-                OnPropertyChanged("ImageApiUrl");
+                OnPropertyChanged();
             }
         }
 
@@ -63,7 +64,7 @@ namespace EmulationManager.Models
             set
             {
                 ConfigurationHelper.SaveConfig("RomDirectory", value);
-                OnPropertyChanged("RomDirectory");
+                OnPropertyChanged();
             }
         }
 
@@ -76,7 +77,7 @@ namespace EmulationManager.Models
             set
             {
                 ConfigurationHelper.SaveConfig("EmulatorDirectory", value);
-                OnPropertyChanged("EmulatorDirectory");
+                OnPropertyChanged();
             }
         }
 
@@ -89,7 +90,7 @@ namespace EmulationManager.Models
             set
             {
                 ConfigurationHelper.SaveConfig("RomExtensions", value);
-                OnPropertyChanged("RomExtensions");
+                OnPropertyChanged();
             }
         }
 
@@ -102,7 +103,7 @@ namespace EmulationManager.Models
             set
             {
                 ConfigurationHelper.SaveConfig("EmulatorAssociations", value);
-                OnPropertyChanged("EmulatorAssociations");
+                OnPropertyChanged();
             }
         }
 
@@ -115,7 +116,7 @@ namespace EmulationManager.Models
             set
             {
                 ConfigurationHelper.SaveConfig("Consoles", value);
-                OnPropertyChanged("Consoles");
+                OnPropertyChanged();
             }
         }
 
@@ -128,7 +129,7 @@ namespace EmulationManager.Models
             set
             {
                 ConfigurationHelper.SaveConfig("ConsoleAliases", value);
-                OnPropertyChanged("ConsoleAliases");
+                OnPropertyChanged();
             }
         }
 
@@ -141,7 +142,7 @@ namespace EmulationManager.Models
             set
             {
                 ConfigurationHelper.SaveConfig("EmulatorLaunchParams", value);
-                OnPropertyChanged("EmulatorLaunchParams");
+                OnPropertyChanged();
             }
         }
 
@@ -154,7 +155,7 @@ namespace EmulationManager.Models
             set
             {
                 ConfigurationHelper.SaveConfig("SteamDirectory", value);
-                OnPropertyChanged("SteamDirectory");
+                OnPropertyChanged();
             }
         }
 
@@ -168,7 +169,7 @@ namespace EmulationManager.Models
             set
             {
                 _romsLoadedCount = int.Parse(value);
-                OnPropertyChanged("RomsLoadedCount");
+                OnPropertyChanged();
             }
         }
 
@@ -182,7 +183,7 @@ namespace EmulationManager.Models
             set
             {
                 _emulatorsLoadedCount = int.Parse(value);
-                OnPropertyChanged("EmulatorsLoadedCount");
+                OnPropertyChanged();
             }
         }
 
@@ -196,25 +197,12 @@ namespace EmulationManager.Models
             set
             {
                 _consolesWithRomsCount = int.Parse(value);
-                OnPropertyChanged("ConsolesWithRomsCount");
+                OnPropertyChanged();
             }
         }
         #endregion
 
         #region methods
-        #endregion
-
-        #region INotifyPropertyChanged Member
-        // Create the OnPropertyChanged method to raise the event 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
-        }
         #endregion
     }
 }
