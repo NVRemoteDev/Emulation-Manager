@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using EmulationManager.Common;
 
 namespace EmulationManager.ViewModels
 {
-    public class EmuManagerViewModel
+    public class EmuManagerViewModel : NotifierBase
     {
         protected Dispatcher dispatcher = Application.Current.Dispatcher;
 
@@ -78,6 +79,32 @@ namespace EmulationManager.ViewModels
         }
         #endregion
 
+        #region Properties
+
+        private string _loadingText;
+        private bool _isLoading;
+
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                SetProperty(ref _isLoading, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public string LoadingText
+        {
+            get { return _loadingText; }
+            set
+            {
+                SetProperty(ref _loadingText, value);
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
         public EmuManagerViewModel()
         {
             EmuManagerModel = new EmuManagerModel();
@@ -95,8 +122,17 @@ namespace EmulationManager.ViewModels
             // Use a Task.Run() here to get these methods off the UI thread as they're slow and it will lock up responsiveness.
             await Task.Run(() =>
             {
+                IsLoading = true;
+                LoadingText = "Loading emulator information from disk...";
+
                 EmulatorModels = IOHelper.GetEmulatorInformationFromDisk(EmuManagerModel.EmulatorDirectory);
+
+                LoadingText = "Loading rom information from disk...";
                 RomModels = IOHelper.GetRomInformationFromDisk(EmuManagerModel.RomDirectory);
+
+                LoadingText = string.Empty;
+
+                IsLoading = false;
             });
 
             if (EmulatorModels == null || RomModels == null)
@@ -136,7 +172,16 @@ namespace EmulationManager.ViewModels
             }
             if (EmulatorModels != null && EmulatorModels.Length > 0 && RomModels != null && RomModels.Length > 0)
             {
-                SteamHelper.WriteSteamShortcuts(RomModels, EmulatorModels);
+                await Task.Run(() =>
+                {
+                    IsLoading = true;
+                    LoadingText = "Writing Steam Shortcuts";
+
+                    SteamHelper.WriteSteamShortcuts(RomModels, EmulatorModels);
+
+                    LoadingText = string.Empty;
+                    IsLoading = false;
+                });
             }
         }
 
