@@ -132,9 +132,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="LICENSE.txt" />
-    <Content Include="Readme.html">
+    <None Include="README.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
