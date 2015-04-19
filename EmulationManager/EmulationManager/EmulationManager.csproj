@@ -87,6 +87,7 @@
     <Compile Include="Commands\DeleteSteamShortcutsCommand.cs" />
     <Compile Include="Commands\FixRomStreamingCompatibilityCommand.cs" />
     <Compile Include="Commands\LoadRomsAndEmulatorsCommand.cs" />
+    <Compile Include="Common\NotifierBase.cs" />
     <Compile Include="Helpers\ConfigurationHelper.cs" />
     <Compile Include="Helpers\DebugManager.cs" />
     <Compile Include="Helpers\IOHelper.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Models\EmulatorModel.cs" />
     <Compile Include="Models\EmuManagerModel.cs" />
     <Compile Include="Models\RomModel.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\EmuManagerViewModel.cs" />
     <Compile Include="Views\EmuManager.xaml.cs">
       <DependentUpon>EmuManager.xaml</DependentUpon>
