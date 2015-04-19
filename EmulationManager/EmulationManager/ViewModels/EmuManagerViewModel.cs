@@ -123,11 +123,11 @@ namespace EmulationManager.ViewModels
             await Task.Run(() =>
             {
                 IsLoading = true;
-                LoadingText = "Loading Emulator information from Disk...";
+                LoadingText = "Loading emulator information from disk...";
 
                 EmulatorModels = IOHelper.GetEmulatorInformationFromDisk(EmuManagerModel.EmulatorDirectory);
 
-                LoadingText = "Loading Rom information from Disk...";
+                LoadingText = "Loading rom information from disk...";
                 RomModels = IOHelper.GetRomInformationFromDisk(EmuManagerModel.RomDirectory);
 
                 LoadingText = string.Empty;
@@ -172,7 +172,16 @@ namespace EmulationManager.ViewModels
             }
             if (EmulatorModels != null && EmulatorModels.Length > 0 && RomModels != null && RomModels.Length > 0)
             {
-                SteamHelper.WriteSteamShortcuts(RomModels, EmulatorModels);
+                await Task.Run(() =>
+                {
+                    IsLoading = true;
+                    LoadingText = "Writing Steam Shortcuts";
+
+                    SteamHelper.WriteSteamShortcuts(RomModels, EmulatorModels);
+
+                    LoadingText = string.Empty;
+                    IsLoading = false;
+                });
             }
         }
 
