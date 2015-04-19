@@ -131,6 +131,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="LICENSE.txt" />
     <Content Include="Readme.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
