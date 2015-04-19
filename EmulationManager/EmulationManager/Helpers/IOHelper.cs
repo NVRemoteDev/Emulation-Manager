@@ -30,7 +30,8 @@ namespace EmulationManager.Helpers
                     // EX association: PS1:ePSXe.exe
                     string emulator = association.Split(':')[1];
 
-                    string[] files = System.IO.Directory.GetFiles(rootEmuDirectory, emulator, SearchOption.AllDirectories);
+                    string[] files = System.IO.Directory.GetFiles(rootEmuDirectory, emulator,
+                        SearchOption.AllDirectories);
 
                     emulatorCount += files.Length;
                 }
@@ -39,6 +40,7 @@ namespace EmulationManager.Helpers
                     // This would mean an improperly formatted emulator association was present if hit
                     continue;
                 }
+
             }
 
             return emulatorCount;
@@ -73,7 +75,16 @@ namespace EmulationManager.Helpers
         /// </summary>
         public static EmulatorModel[] GetEmulatorInformationFromDisk(string rootEmuDirectory)
         {
-            EmulatorModel[] models = new EmulatorModel[EnumerateEmulators(rootEmuDirectory)];
+            EmulatorModel[] models = null;
+            try
+            {
+                models = new EmulatorModel[EnumerateEmulators(rootEmuDirectory)];
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                DebugManager.ShowErrorDialog("An error occured getting the emulator directory", ex);
+                return models;
+            }
 
             string[] emulatorConsoleAssociations = new EmuManagerModel().EmulatorAssociations.Split(';');
 
@@ -112,20 +123,37 @@ namespace EmulationManager.Helpers
         public static RomModel[] GetRomInformationFromDisk(string rootRomDirectory)
         {
             string consoleAliases = ConfigurationManager.AppSettings.Get("ConsoleAliases");
+            RomModel[] models = null;
 
-            RomModel[] models = new RomModel[EnumerateRomFiles(rootRomDirectory)];
+            try
+            {
+                models = new RomModel[EnumerateRomFiles(rootRomDirectory)];
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                DebugManager.ShowErrorDialog("An error occured getting the rom directory", ex);
+                return models;
+            }
+
             string[] romExtensions = new EmuManagerModel().RomExtensions.Split(',');
             
             //TODO: We probably want to take a look at the nesting here
             int x = 0;
-            foreach (string extension in romExtensions)
+            try
             {
-                string[] files = System.IO.Directory.GetFiles(rootRomDirectory, "*." + extension, SearchOption.AllDirectories);
-                for (int i = 0; i < files.Length; i++)
+                foreach (string extension in romExtensions)
                 {
-                    models[x] = PopulateRomModelFromRomPathRomFileName(files[i], consoleAliases);
-                    x++;
+                    string[] files = System.IO.Directory.GetFiles(rootRomDirectory, "*." + extension, SearchOption.AllDirectories);
+                    for (int i = 0; i < files.Length; i++)
+                    {
+                        models[x] = PopulateRomModelFromRomPathRomFileName(files[i], consoleAliases);
+                        x++;
+                    }
                 }
+            }
+            catch (NullReferenceException)
+            {
+                // This would mean an improperly formatted emulator association was present if hit
             }
 
             return models;
