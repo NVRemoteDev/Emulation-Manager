@@ -99,6 +99,15 @@ namespace EmulationManager.ViewModels
                 RomModels = IOHelper.GetRomInformationFromDisk(EmuManagerModel.RomDirectory);
             });
 
+            if (EmulatorModels == null || RomModels == null)
+            {
+                // If either model is null, we probably have already shown an error to the user,
+                // since something screwed up. But we may want to explain that nothing has happened in terms
+                // of loading the emulators and roms.
+                // TODO: Show error alert.
+                return;
+            }
+
             EmuManagerModel.RomsLoadedCount = RomModels.Length.ToString();
             EmuManagerModel.EmulatorsLoadedCount = EmulatorModels.Length.ToString();
             EmuManagerModel.ConsolesWithRomsCount = RomModels.GroupBy(x => x.Console).ToList().Count.ToString();
