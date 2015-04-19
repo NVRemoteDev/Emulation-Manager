@@ -40,6 +40,11 @@
                     </StackPanel>
                 </StackPanel>
 
+                <StackPanel Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" Name="LoadingPanel">
+                    <ProgressBar Height="10" IsIndeterminate="True"/>
+                    <TextBlock HorizontalAlignment="Center" FontSize="15" Text="{Binding LoadingText}"/>
+                </StackPanel>
+
                 <StackPanel Name="DataDisplay" Margin="5,10,0,0">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock TextDecorations="Underline">Roms Loaded:</TextBlock>
