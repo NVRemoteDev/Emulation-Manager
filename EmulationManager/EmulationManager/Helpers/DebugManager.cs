@@ -9,9 +9,9 @@ namespace EmulationManager.Helpers
 {
     public static class DebugManager
     {
-        public static MessageBoxResult ShowErrorDialog(string errorMessage, Exception exception)
+        public static void ShowErrorDialog(string errorMessage, Exception exception)
         {
-            return MessageBox.Show(errorMessage + Environment.NewLine + exception.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+            MessageBox.Show(errorMessage + Environment.NewLine + exception.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
         }
     }
 }
