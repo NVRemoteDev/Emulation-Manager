@@ -1,3 +1,4 @@
+Check out our project website: http://www.hometheatertablet.com/
 
 # Emulation Manager 
 The goal of Emulation Manager is to provide a user-friendly, budget friendly nostalgia gaming experience in the living room or on the go.
