@@ -167,7 +167,7 @@ namespace EmulationManager.ViewModels
                     IsLoading = true;
                     LoadingText = "Fixing rom streaming compatability...";
 
-                    RomHelper.FixRomsForStreaming(RomModels);
+                    IOHelper.FixRomsForStreaming(RomModels);
 
                     LoadingText = string.Empty;
                     IsLoading = false;
