@@ -28,7 +28,7 @@ namespace EmulationManager.Commands
         {
             if (CanExecute(parameter))
             {
-                _viewModel.FixRomStreamingCompatibility();
+                _viewModel.FixRomStreamingCompatibilityAsync();
             }
         }
         #endregion

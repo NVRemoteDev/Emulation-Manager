@@ -1,4 +1,4 @@
-Check out our project website: http://www.hometheatertablet.com/
+Check out our project website: http://www.hometheatertablet.com/tritium-emulation-manager-steam/
 
 # Tritium Emulation Manager 
 The goal of Tritium Emulation Manager is to provide a user-friendly, budget friendly nostalgia gaming experience in the living room or on the go.
