@@ -19,7 +19,7 @@ namespace EmulationManager.Models
         public string Path { get; set; }
 
         /// <summary>
-        /// Gets the nae
+        /// Gets the name
         /// </summary>
         public string StreamingCompatibleName { get; set; }
 

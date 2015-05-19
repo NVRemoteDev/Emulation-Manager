@@ -91,7 +91,6 @@
     <Compile Include="Helpers\ConfigurationHelper.cs" />
     <Compile Include="Helpers\DebugManager.cs" />
     <Compile Include="Helpers\IOHelper.cs" />
-    <Compile Include="Helpers\RomHelper.cs" />
     <Compile Include="Helpers\SteamHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Models\EmulatorModel.cs" />

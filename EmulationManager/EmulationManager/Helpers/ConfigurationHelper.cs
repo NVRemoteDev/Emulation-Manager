@@ -17,5 +17,10 @@ namespace EmulationManager.Helpers
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
         }
+
+        public static string GetStreamingCompatiblityReplacementName()
+        {
+            return "_Tritium_";
+        }
     }
 }

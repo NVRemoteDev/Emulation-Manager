@@ -172,7 +172,7 @@ namespace EmulationManager.Helpers
             RomModel model = new RomModel();
             model.Path = file;
             model.Name = filePathParts.Last().Split('.')[0];
-            model.StreamingCompatibleName = StringHelper.RemoveWhitespace(model.Name);
+            model.StreamingCompatibleName = model.Name.Replace(" ", ConfigurationHelper.GetStreamingCompatiblityReplacementName());
 
             string consoles = ConfigurationManager.AppSettings.Get("Consoles");
             
@@ -201,6 +201,34 @@ namespace EmulationManager.Helpers
             }
 
             return model;
+        }
+
+        /// <summary>
+        /// Changes the ROM filename to be compatible with streaming over Steam Big Picture
+        /// </summary>
+        public static void FixRomsForStreaming(RomModel[] roms)
+        {
+            foreach (var rom in roms)
+            {
+                if (!string.IsNullOrEmpty(rom.Path) && !string.IsNullOrEmpty(rom.StreamingCompatibleName))
+                {
+                    File.Move(rom.Path, rom.StreamingCompatibleName);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Reverts the FixRomsForStreaming changes
+        /// </summary>
+        public static void RevertRomsFromStreaming(RomModel[] roms)
+        {
+            foreach (var rom in roms)
+            {
+                if (!string.IsNullOrEmpty(rom.Path) && !string.IsNullOrEmpty(rom.StreamingCompatibleName))
+                {
+                    File.Move(rom.StreamingCompatibleName, rom.Path);
+                }
+            }
         }
     }
 }
