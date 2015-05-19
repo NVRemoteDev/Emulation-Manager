@@ -142,7 +142,7 @@ Enter 'C:\Emulators' (trailing slash optional)";
 
         private void FixRomsForStreamingCompatibilityButton_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show("This will rename your rom files permanently, removing spaces. This is recommended for streaming. Proceed?",
+            var result = MessageBox.Show("This will rename your rom files. This is recommended for streaming. Proceed?",
                 "Rename Roms Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning, MessageBoxResult.Cancel);
 
             if (result != MessageBoxResult.Yes)

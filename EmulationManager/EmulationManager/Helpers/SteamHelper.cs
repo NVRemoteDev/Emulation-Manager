@@ -26,7 +26,7 @@ namespace EmulationManager.Helpers
                 {
                     shortcutsBody += "\x0" + shortcutNumber.ToString() + "\x0";
                     shortcutsBody += GenerateKeyValuePair("AppName", rom.Name);
-                    shortcutsBody += GenerateKeyValuePair("Exe", emulator.FullCommandLineLaunch.Replace("%g", rom.Path));
+                    shortcutsBody += GenerateKeyValuePair("Exe", emulator.FullCommandLineLaunch.Replace("%g", GetRomPath(rom)));
                     shortcutsBody += GenerateKeyValuePair("StartDir", emulator.StartDirectory);
                     shortcutsBody += GenerateKeyValuePair("icon", "");
                     shortcutsBody += GenerateTags(emulator.Console);
@@ -59,6 +59,15 @@ namespace EmulationManager.Helpers
             {
                 File.WriteAllText(directory + @"\config\shortcuts.vdf", shortcutText);
             }
+        }
+
+        private static string GetRomPath(RomModel rom)
+        {
+            if (rom.UseStreamingCompatiblePath)
+            {
+                return rom.StreamingCompatiblePath;
+            }
+            return rom.Path;
         }
     }
 }

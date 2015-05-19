@@ -167,15 +167,21 @@ namespace EmulationManager.Helpers
         /// <returns>Rom Model</returns>
         private static RomModel PopulateRomModelFromRomPathRomFileName(string file, string consoleAliases)
         {
-            string[] filePathParts = file.Split('\\');
-
             RomModel model = new RomModel();
             model.Path = file;
-            model.Name = filePathParts.Last().Split('.')[0];
-            model.StreamingCompatibleName = model.Name.Replace(" ", ConfigurationHelper.GetStreamingCompatiblityReplacementName());
+            model.Name = Path.GetFileNameWithoutExtension(file).Replace(ConfigurationHelper.GetStreamingCompatiblityReplacementName(), " ");
 
+            string streamingFileName = Path.GetFileName(file);
+
+            // Rplace space in streamingName
+            streamingFileName = streamingFileName.Replace(" ", ConfigurationHelper.GetStreamingCompatiblityReplacementName());
+
+            model.StreamingCompatiblePath = string.Format(@"{0}\{1}", 
+                Path.GetDirectoryName(file), 
+                streamingFileName);
+
+            string[] filePathParts = file.Split('\\');
             string consoles = ConfigurationManager.AppSettings.Get("Consoles");
-            
             // Attempt to find the console based on the rom directory (i.e.: FooConsole/BarRom.ext would set the console to FooConsole)
             // [length - 1] because the length index would be the file name
             int length = filePathParts.Length - 1;
@@ -211,9 +217,10 @@ namespace EmulationManager.Helpers
         {
             foreach (var rom in roms)
             {
-                if (!string.IsNullOrEmpty(rom.Path) && !string.IsNullOrEmpty(rom.StreamingCompatibleName))
+                if (!string.IsNullOrEmpty(rom.Path) && !string.IsNullOrEmpty(rom.StreamingCompatiblePath))
                 {
-                    File.Move(rom.Path, rom.StreamingCompatibleName);
+                    File.Move(rom.Path, rom.StreamingCompatiblePath);
+                    rom.UseStreamingCompatiblePath = true;
                 }
             }
         }
@@ -225,9 +232,10 @@ namespace EmulationManager.Helpers
         {
             foreach (var rom in roms)
             {
-                if (!string.IsNullOrEmpty(rom.Path) && !string.IsNullOrEmpty(rom.StreamingCompatibleName))
+                if (!string.IsNullOrEmpty(rom.Path) && !string.IsNullOrEmpty(rom.StreamingCompatiblePath))
                 {
-                    File.Move(rom.StreamingCompatibleName, rom.Path);
+                    File.Move(rom.StreamingCompatiblePath, rom.Path);
+                    rom.UseStreamingCompatiblePath = false;
                 }
             }
         }
