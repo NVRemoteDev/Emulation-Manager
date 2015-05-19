@@ -166,11 +166,11 @@ namespace EmulationManager.ViewModels
 
         public async Task CreateSteamShortcutsAsync()
         {
-            if (EmulatorModels != null && EmulatorModels.Length > 0 && RomModels != null && RomModels.Length > 0)
+            if (CheckModels())
             {
                 await LoadRomsAndEmulatorsAsync();
             }
-            if (EmulatorModels != null && EmulatorModels.Length > 0 && RomModels != null && RomModels.Length > 0)
+            if (CheckModels())
             {
                 await Task.Run(() =>
                 {
@@ -197,6 +197,11 @@ namespace EmulationManager.ViewModels
                 return false;
             }
             return true; 
+        }
+
+        public bool CheckModels()
+        {
+            return EmulatorModels != null && EmulatorModels.Length > 0 && RomModels != null && RomModels.Length > 0;
         }
     }
 }

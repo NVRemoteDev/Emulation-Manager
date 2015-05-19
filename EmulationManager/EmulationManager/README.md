@@ -1,9 +1,9 @@
 Check out our project website: http://www.hometheatertablet.com/
 
-# Emulation Manager 
-The goal of Emulation Manager is to provide a user-friendly, budget friendly nostalgia gaming experience in the living room or on the go.
+# Tritium Emulation Manager 
+The goal of Tritium Emulation Manager is to provide a user-friendly, budget friendly nostalgia gaming experience in the living room or on the go.
 
-The main feature of Emulation Manager is it allows ROM files to be launched directly from Steam, including and for this project most importantly over streaming like Nvidia Gamestream or Limelight. This will include default button mappings for a TBD core set of emulators, allowing a controller like the Nvidia Shield Controller to be used remotely. This presents a current challenge since the emulators aren't easily configurable over a stream.
+The main feature of Tritium Emulation Manager is it allows ROM files to be launched directly from Steam, including and for this project most importantly over streaming like Nvidia Gamestream or Limelight. This will include default button mappings for a TBD core set of emulators, allowing a controller like the Nvidia Shield Controller to be used remotely. This presents a current challenge since the emulators aren't easily configurable over a stream.
 
 Pre-alpha. The entire project is a work in progress.
 
