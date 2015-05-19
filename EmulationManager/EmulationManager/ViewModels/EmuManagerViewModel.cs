@@ -131,7 +131,6 @@ namespace EmulationManager.ViewModels
                 RomModels = IOHelper.GetRomInformationFromDisk(EmuManagerModel.RomDirectory);
 
                 LoadingText = string.Empty;
-
                 IsLoading = false;
             });
 
@@ -159,9 +158,21 @@ namespace EmulationManager.ViewModels
             throw new System.NotImplementedException();
         }
 
-        public void FixRomStreamingCompatibility()
+        public async Task FixRomStreamingCompatibilityAsync()
         {
-            throw new System.NotImplementedException();
+            if (CheckModelValidity())
+            {
+                await Task.Run(() =>
+                {
+                    IsLoading = true;
+                    LoadingText = "Fixing rom streaming compatability...";
+
+                    RomHelper.FixRomsForStreaming(RomModels);
+
+                    LoadingText = string.Empty;
+                    IsLoading = false;
+                });
+            }
         }
 
         public async Task CreateSteamShortcutsAsync()
@@ -169,7 +180,6 @@ namespace EmulationManager.ViewModels
             if (CheckModelValidity())
             {
                 await LoadRomsAndEmulatorsAsync();
-
                 await Task.Run(() =>
                 {
                     IsLoading = true;
