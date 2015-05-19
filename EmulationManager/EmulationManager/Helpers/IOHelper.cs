@@ -176,6 +176,7 @@ namespace EmulationManager.Helpers
 
             string consoles = ConfigurationManager.AppSettings.Get("Consoles");
             
+            // Attempt to find the console based on the rom directory (i.e.: FooConsole/BarRom.ext would set the console to FooConsole)
             // [length - 1] because the length index would be the file name
             int length = filePathParts.Length - 1;
             while (length >= 0)
