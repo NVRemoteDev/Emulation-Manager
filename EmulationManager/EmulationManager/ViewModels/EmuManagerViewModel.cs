@@ -166,12 +166,10 @@ namespace EmulationManager.ViewModels
 
         public async Task CreateSteamShortcutsAsync()
         {
-            if (CheckModels())
+            if (CheckModelValidity())
             {
                 await LoadRomsAndEmulatorsAsync();
-            }
-            if (CheckModels())
-            {
+
                 await Task.Run(() =>
                 {
                     IsLoading = true;
@@ -199,7 +197,7 @@ namespace EmulationManager.ViewModels
             return true; 
         }
 
-        public bool CheckModels()
+        public bool CheckModelValidity()
         {
             return EmulatorModels != null && EmulatorModels.Length > 0 && RomModels != null && RomModels.Length > 0;
         }
