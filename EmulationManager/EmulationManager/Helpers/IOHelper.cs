@@ -40,6 +40,11 @@ namespace EmulationManager.Helpers
                     // This would mean an improperly formatted emulator association was present if hit
                     continue;
                 }
+                catch (IOException)
+                {
+                    // This would mean the emulator directory was set incorrectly or unreadable
+                    continue;
+                }
 
             }
 
@@ -62,9 +67,17 @@ namespace EmulationManager.Helpers
             int romCount = 0;
             foreach (string extension in romExtensions)
             {
-                string[] files = System.IO.Directory.GetFiles(rootRomDirectory, "*." + extension, SearchOption.AllDirectories);
+                try
+                {
+                    string[] files = System.IO.Directory.GetFiles(rootRomDirectory, "*." + extension, SearchOption.AllDirectories);
 
-                romCount += files.Length;
+                    romCount += files.Length;
+                }
+                catch (IOException)
+                {
+                    // This would mean the emulator directory was set incorrectly or unreadable
+                    continue;
+                }
             }
                 
             return romCount;
@@ -112,6 +125,11 @@ namespace EmulationManager.Helpers
                     // This would mean an improperly formatted emulator association was present if hit
                     continue;
                 }
+                catch (IOException)
+                {
+                    // This would mean the emulator directory was set incorrectly or unreadable
+                    continue;
+                }
             }
 
             return models;
@@ -154,6 +172,10 @@ namespace EmulationManager.Helpers
             catch (NullReferenceException)
             {
                 // This would mean an improperly formatted emulator association was present if hit
+            }
+            catch (IOException)
+            {
+                // This would mean the rom directory was set incorrectly or unreadable
             }
 
             return models;
