@@ -1,0 +1,144 @@
+[General Settings]
+Force Cursor Hide=0
+Mouse Unfocus=1
+Background=1
+Multiple Bindings=0
+DirectInput Game Devices=1
+XInput=1
+DualShock 3=0
+Multitap 1=0
+Multitap 2=0
+Escape Fullscreen Hack=1
+Disable Screen Saver=1
+Logging=0
+Save State in Title=0
+GH2=0
+Turbo Key Hack=0
+Vista Volume=1
+Close Hacks=0
+Keyboard Mode=2
+Mouse Mode=0
+Volume=100
+[Pad 0 0]
+Mode=1
+Auto Analog=0
+[Pad 0 1]
+Mode=1
+Auto Analog=0
+[Pad 0 2]
+Mode=1
+Auto Analog=0
+[Pad 0 3]
+Mode=1
+Auto Analog=0
+[Pad 1 0]
+Mode=1
+Auto Analog=0
+[Pad 1 1]
+Mode=1
+Auto Analog=0
+[Pad 1 2]
+Mode=1
+Auto Analog=0
+[Pad 1 3]
+Mode=1
+Auto Analog=0
+[Device 0]
+Display Name=Ignore Keyboard
+Instance ID=Ignore Keyboard
+API=7
+Type=1
+[Device 1]
+Display Name=WM Keyboard
+Instance ID=WM Keyboard
+API=2
+Type=1
+[Device 2]
+Display Name=WM Mouse
+Instance ID=WM Mouse
+API=2
+Type=2
+[Device 3]
+Display Name=Raw KB: HID Keyboard Device
+Instance ID=\\?\HID#VID_046D&PID_C068&MI_01&Col01#7&d60fe61&0&0000#{884b96c3-56ef-11d1-bc8c-00a0c91405dd}
+API=3
+Type=1
+[Device 4]
+Display Name=Raw KB: HID Keyboard Device
+Instance ID=\\?\HID#VID_046D&PID_C24D&MI_00#7&142763fe&0&0000#{884b96c3-56ef-11d1-bc8c-00a0c91405dd}
+API=3
+Type=1
+[Device 5]
+Display Name=Raw KB: HID Keyboard Device
+Instance ID=\\?\HID#VID_046D&PID_C24D&MI_01&Col01#7&fafd9c4&0&0000#{884b96c3-56ef-11d1-bc8c-00a0c91405dd}
+API=3
+Type=1
+[Device 6]
+Display Name=Raw MS: HID-compliant mouse
+Instance ID=\\?\HID#VID_046D&PID_C068&MI_00#7&31383c23&0&0000#{378de44c-56ef-11d1-bc8c-00a0c91405dd}
+Product ID=\\?\HID\VID_046D&PID_C068&MI_00
+API=3
+Type=2
+[Device 7]
+Display Name=Simulated Keyboard
+Instance ID=Simulated Keyboard
+API=3
+Type=1
+[Device 8]
+Display Name=Simulated Mouse
+Instance ID=Simulated Mouse
+API=3
+Type=2
+[Device 9]
+Display Name=DX Mouse
+Instance ID=6F1D2B60-D5A0-11CF-BFC7-444553540000
+Product ID=6F1D2B60-D5A0-11CF-BFC7-444553540000
+API=1
+Type=2
+[Device 10]
+Display Name=DX Keyboard
+Instance ID=6F1D2B61-D5A0-11CF-BFC7-444553540000
+Product ID=6F1D2B61-D5A0-11CF-BFC7-444553540000
+API=1
+Type=1
+[Device 11]
+Display Name=DX G500
+Instance ID=7E9FFF70-0086-11E4-8001-444553540000
+Product ID=C068046D-0000-0000-0000-504944564944
+API=1
+Type=3
+[Device 12]
+Display Name=DX Logitech G710 Keyboard
+Instance ID=7EA1D430-0086-11E4-8005-444553540000
+Product ID=C24D046D-0000-0000-0000-504944564944
+API=1
+Type=3
+[Device 13]
+Display Name=XInput Pad 0
+Instance ID=XInput Pad 0
+API=4
+Type=3
+Binding 0=0x00040000, 0, 20, 65536, 0, 0, 0
+Binding 1=0x00040001, 0, 22, 65536, 0, 0, 0
+Binding 2=0x00040002, 0, 23, 65536, 0, 0, 0
+Binding 3=0x00040003, 0, 21, 65536, 0, 0, 0
+Binding 4=0x00040004, 0, 19, 65536, 0, 0, 0
+Binding 5=0x00040005, 0, 16, 65536, 0, 0, 0
+Binding 6=0x00040006, 0, 17, 65536, 0, 0, 0
+Binding 7=0x00040007, 0, 18, 65536, 0, 0, 0
+Binding 8=0x00040008, 0, 26, 65536, 0, 0, 0
+Binding 9=0x00040009, 0, 27, 65536, 0, 0, 0
+Binding 10=0x0004000C, 0, 30, 65536, 0, 0, 0
+Binding 11=0x0004000D, 0, 29, 65536, 0, 0, 0
+Binding 12=0x0004000E, 0, 31, 65536, 0, 0, 0
+Binding 13=0x0004000F, 0, 28, 65536, 0, 0, 0
+Binding 14=0x00200010, 0, 24, 65536, 0, 0, 1
+Binding 15=0x00200011, 0, 25, 65536, 0, 0, 1
+Binding 16=0x01020012, 0, 33, 65536, 0, 0, 13172
+Binding 17=0x02020012, 0, 35, 65536, 0, 0, 13172
+Binding 18=0x01020013, 0, 32, 1429482, 0, 0, 13172
+Binding 19=0x02020013, 0, 34, 65536, 0, 0, 13172
+Binding 20=0x01020014, 0, 37, 65536, 0, 0, 13172
+Binding 21=0x02020014, 0, 39, 65536, 0, 0, 13172
+Binding 22=0x01020015, 0, 36, 65536, 0, 0, 13172
+Binding 23=0x02020015, 0, 38, 65536, 0, 0, 13172

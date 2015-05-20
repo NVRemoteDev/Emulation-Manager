@@ -11,6 +11,22 @@ Please feel free to fork if you want to help!
 
 Inspired by https://github.com/scottrice/Ice
 
+# Controller Configurations
+Inside the release folder (or the ControllerConfigurations folder if you're looking at the source) you will find some basic Shield controller configurations.
+These will let you use some basic functionality. You may want to customize the file directly, or in the emulator, to your liking.
+
+# ZSNES
+zinput.cfg is the Shield controller ZSNES bindings. Put the file in your ZSNES directory. 
+Start and select don't work for some reason, so hold start until the bars come up on the top and bottom of the screen.
+Then press y to show the keyboard. Enter on the keyboard is start and PgDn or PgUp is select (I can't remember which). 
+I'll look into SNES9x and see if that will have better input detection.
+
+The app.config in the project has a better launch option for ZSNES to get it displaying correctly. 
+You may have to launch ZSNES first and make your own custom resolution and video options.
+
+# PCSX2
+Load the .lily file for Shield controller support
+
 # License
 GPLv2 See LICENSE.txt
 
