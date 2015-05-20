@@ -8,10 +8,10 @@ using System.Windows.Input;
 
 namespace EmulationManager.Commands
 {
-    public class CheckRomStreamingCompatibilityCommand : ICommand
+    public class RevertRomStreamingCompatibilityCommand : ICommand
     {
         private EmuManagerViewModel _viewModel;
-        public CheckRomStreamingCompatibilityCommand(EmuManagerViewModel viewModel)
+        public RevertRomStreamingCompatibilityCommand(EmuManagerViewModel viewModel)
         {
             _viewModel = viewModel;
         }
@@ -28,7 +28,7 @@ namespace EmulationManager.Commands
         {
             if (CanExecute(parameter))
             {
-                _viewModel.CheckRomStreamingCompatibility();
+                _viewModel.RevertRomStreamingCompatibilityAsync();
             }
         }
         #endregion
