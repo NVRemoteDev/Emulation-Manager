@@ -138,7 +138,7 @@
                     <MenuItem Header="Exit"/>
                 </MenuItem>
                 <MenuItem Header="Help">
-                    <MenuItem Header="About..."/>
+                    <MenuItem x:Name="AboutMenuItem" Header="About..." Click="AboutMenuItem_Click"/>
                 </MenuItem>
             </Menu>
             <StackPanel></StackPanel>
