@@ -26,7 +26,7 @@ namespace EmulationManager.ViewModels
         
         public ICommand CleanRomNamesCommand { get; private set; }
         
-        public ICommand CheckRomStreamingCompatibilityCommand { get; private set; }
+        public ICommand RevertRomStreamingCompatibilityCommand { get; private set; }
         
         public ICommand FixRomStreamingCompatibilityCommand { get; private set; }
         
@@ -111,41 +111,52 @@ namespace EmulationManager.ViewModels
 
             LoadRomsAndEmulatorsCommand = new LoadRomsAndEmulatorsCommand(this);
             CleanRomNamesCommand = new CleanRomNamesCommand(this);
-            CheckRomStreamingCompatibilityCommand = new CheckRomStreamingCompatibilityCommand(this);
+            RevertRomStreamingCompatibilityCommand = new RevertRomStreamingCompatibilityCommand(this);
             FixRomStreamingCompatibilityCommand = new FixRomStreamingCompatibilityCommand(this);
             CreateSteamShortcutsCommand = new CreateSteamShortcutsCommand(this);
             DeleteSteamShortcutsCommand = new DeleteSteamShortcutsCommand(this);
+
+            if (EmuManagerModel.AutoImportRoms)
+            {
+                LoadRomsAndEmulatorsAsync(false);
+            }
         }
 
-        public async Task LoadRomsAndEmulatorsAsync()
+        public async Task LoadRomsAndEmulatorsAsync(bool showError = true)
         {
-            // Use a Task.Run() here to get these methods off the UI thread as they're slow and it will lock up responsiveness.
-            await Task.Run(() =>
+            if (CheckRomAndEmulatorDirectories())
             {
-                IsLoading = true;
-                LoadingText = "Loading emulator information from disk...";
+                // Use a Task.Run() here to get these methods off the UI thread as they're slow and it will lock up responsiveness.
+                await Task.Run(() =>
+                {
+                    IsLoading = true;
+                    LoadingText = "Loading emulator information from disk...";
 
-                EmulatorModels = IOHelper.GetEmulatorInformationFromDisk(EmuManagerModel.EmulatorDirectory);
+                    EmulatorModels = IOHelper.GetEmulatorInformationFromDisk(EmuManagerModel.EmulatorDirectory);
 
-                LoadingText = "Loading rom information from disk...";
-                RomModels = IOHelper.GetRomInformationFromDisk(EmuManagerModel.RomDirectory);
+                    LoadingText = "Loading rom information from disk...";
+                    RomModels = IOHelper.GetRomInformationFromDisk(EmuManagerModel.RomDirectory);
 
-                LoadingText = string.Empty;
-                IsLoading = false;
-            });
+                    LoadingText = string.Empty;
+                    IsLoading = false;
+                });
 
-            if (EmulatorModels == null || RomModels == null)
-            {
-                // If either model is null, we probably have already shown an error to the user,
-                // since something screwed up. But we may want to explain that nothing has happened in terms
-                // of loading the emulators and roms.
-                // TODO: Show error alert.
-                return;
+                if (EmulatorModels == null || RomModels == null)
+                {
+                    DebugManager.ShowErrorDialog("No roms, or no emulators were able to be loaded. Please check your directories layout.", null);
+                    return;
+                }
+
+                EmuManagerModel.RomsLoadedCount = RomModels.Length.ToString();
+                EmuManagerModel.EmulatorsLoadedCount = EmulatorModels.Length.ToString();
+                EmuManagerModel.ConsolesWithRomsCount = RomModels.GroupBy(x => x.Console).ToList().Count.ToString();
             }
-
-            EmuManagerModel.RomsLoadedCount = RomModels.Length.ToString();
-            EmuManagerModel.EmulatorsLoadedCount = EmulatorModels.Length.ToString();
-            EmuManagerModel.ConsolesWithRomsCount = RomModels.GroupBy(x => x.Console).ToList().Count.ToString();
+            else
+            {
+                // Since this could conceivably be autoloaded we don't want to show an error unless it's a distinct user interaction that calls this method
+                if (showError)
+                    DebugManager.ShowErrorDialog("You must load your ROMs and emulators first.", null);
+            }
         }
 
         public void CleanRomNames()
@@ -153,9 +164,25 @@ namespace EmulationManager.ViewModels
             throw new System.NotImplementedException();
         }
 
-        public void CheckRomStreamingCompatibility()
+        public async Task RevertRomStreamingCompatibilityAsync()
         {
-            throw new System.NotImplementedException();
+            if (CheckModelValidity())
+            {
+                await Task.Run(() =>
+                {
+                    IsLoading = true;
+                    LoadingText = "Fixing rom streaming compatibility...";
+
+                    IOHelper.RevertRomsFromStreaming(RomModels);
+
+                    LoadingText = string.Empty;
+                    IsLoading = false;
+                });
+            }
+            else
+            {
+                DebugManager.ShowErrorDialog("You must load your ROMs and emulators first.", null);
+            }
         }
 
         public async Task FixRomStreamingCompatibilityAsync()
@@ -165,13 +192,17 @@ namespace EmulationManager.ViewModels
                 await Task.Run(() =>
                 {
                     IsLoading = true;
-                    LoadingText = "Fixing rom streaming compatability...";
+                    LoadingText = "Fixing rom streaming compatibility...";
 
                     IOHelper.FixRomsForStreaming(RomModels);
 
                     LoadingText = string.Empty;
                     IsLoading = false;
                 });
+            }
+            else
+            {
+                DebugManager.ShowErrorDialog("You must load your ROMs and emulators first.", null);
             }
         }
 
@@ -183,7 +214,7 @@ namespace EmulationManager.ViewModels
                 await Task.Run(() =>
                 {
                     IsLoading = true;
-                    LoadingText = "Writing Steam Shortcuts";
+                    LoadingText = "Writing Steam shortcuts...";
 
                     SteamHelper.WriteSteamShortcuts(RomModels, EmulatorModels);
 

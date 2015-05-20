@@ -81,7 +81,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Commands\CheckRomStreamingCompatibilityCommand.cs" />
+    <Compile Include="Commands\RevertRomStreamingCompatibilityCommand.cs" />
     <Compile Include="Commands\CleanRomNamesCommand.cs" />
     <Compile Include="Commands\CreateSteamShortcutsCommand.cs" />
     <Compile Include="Commands\DeleteSteamShortcutsCommand.cs" />
