@@ -151,11 +151,22 @@ Enter 'C:\Emulators' (trailing slash optional)";
             if (viewModel != null && viewModel.FixRomStreamingCompatibilityCommand.CanExecute(null))
             {
                 viewModel.FixRomStreamingCompatibilityCommand.Execute(null);
-                MessageBox.Show("Your roms have been renamed. You may now create the Steam shortcuts.");
             }
             else
             {
                 MessageBox.Show("Unable to execute command. Did you load Roms and Emulators?");
+            }
+        }
+
+        private void AboutMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("http://www.hometheatertablet.com/tritium-emulation-manager-steam/");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to open website.");
             }
         }
     }
