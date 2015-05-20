@@ -180,7 +180,7 @@ Enter 'C:\Emulators' (trailing slash optional)";
             var viewModel = mainGrid.DataContext as ViewModels.EmuManagerViewModel;
             if (viewModel != null && viewModel.FixRomStreamingCompatibilityCommand.CanExecute(null))
             {
-                viewModel.FixRomStreamingCompatibilityCommand.Execute(null);
+                viewModel.RevertRomStreamingCompatibilityCommand.Execute(null);
             }
             else
             {

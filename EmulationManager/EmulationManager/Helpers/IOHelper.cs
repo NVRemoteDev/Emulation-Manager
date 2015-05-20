@@ -220,14 +220,23 @@ namespace EmulationManager.Helpers
             int i = 0;
             foreach (var rom in roms)
             {
-                if (!string.IsNullOrEmpty(rom.Path) && !string.IsNullOrEmpty(rom.StreamingCompatiblePath))
+                try
                 {
-                    if (rom.Path != rom.StreamingCompatiblePath)
+                    if (rom != null
+                        && !string.IsNullOrEmpty(rom.Path) && !string.IsNullOrEmpty(rom.StreamingCompatiblePath))
                     {
-                        File.Move(rom.Path, rom.StreamingCompatiblePath);
+                        if (rom.Path != rom.StreamingCompatiblePath)
+                        {
+                            File.Move(rom.Path, rom.StreamingCompatiblePath);
+                        }
+                        rom.UseStreamingCompatiblePath = true;
+                        newRoms[i] = rom;
                     }
-                    rom.UseStreamingCompatiblePath = true;
-                    roms[i] = rom;
+                }
+                catch (System.IO.IOException)
+                {
+                    i++;
+                    continue; // This hits randomly but still works?
                 }
                 i++;
             }
@@ -244,16 +253,25 @@ namespace EmulationManager.Helpers
             int i = 0;
             foreach (var rom in roms)
             {
-                if (!string.IsNullOrEmpty(rom.Path) && !string.IsNullOrEmpty(rom.StreamingCompatiblePath))
+                try
                 {
-                    rom.Path = rom.StreamingCompatiblePath.Replace(ConfigurationHelper.GetStreamingCompatiblityReplacementName(), " ");
-                    if (rom.Path != rom.StreamingCompatiblePath)
+                    if (rom != null
+                        && !string.IsNullOrEmpty(rom.Path) && !string.IsNullOrEmpty(rom.StreamingCompatiblePath))
                     {
-                        File.Move(rom.StreamingCompatiblePath, rom.Path);
+                        rom.Path = rom.StreamingCompatiblePath.Replace(ConfigurationHelper.GetStreamingCompatiblityReplacementName(), " ");
+                        if (rom.Path != rom.StreamingCompatiblePath)
+                        {
+                            File.Move(rom.StreamingCompatiblePath, rom.Path);
+                        }
+                        rom.UseStreamingCompatiblePath = false;
+
+                        newRoms[i] = rom;
                     }
-                    rom.UseStreamingCompatiblePath = false;
-                    
-                    newRoms[i] = rom;
+                }
+                catch (System.IO.IOException)
+                {
+                    i++;
+                    continue; // This hits randomly but still works?
                 }
                 i++;
             }

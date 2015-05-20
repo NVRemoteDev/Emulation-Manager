@@ -24,11 +24,11 @@ namespace EmulationManager.Commands
 
         public event EventHandler CanExecuteChanged { add { } remove { } }
 
-        public void Execute(object parameter)
+        public async void Execute(object parameter)
         {
             if (CanExecute(parameter))
             {
-                _viewModel.FixRomStreamingCompatibilityAsync();
+                await _viewModel.FixRomStreamingCompatibilityAsync();
             }
         }
         #endregion

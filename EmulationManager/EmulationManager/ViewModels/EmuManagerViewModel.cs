@@ -124,7 +124,7 @@ namespace EmulationManager.ViewModels
 
         public async Task LoadRomsAndEmulatorsAsync(bool showError = true)
         {
-            if (CheckRomAndEmulatorDirectories())
+            if (CheckRomAndEmulatorDirectories() && CheckCanDoWork())
             {
                 // Use a Task.Run() here to get these methods off the UI thread as they're slow and it will lock up responsiveness.
                 await Task.Run(() =>
@@ -166,12 +166,12 @@ namespace EmulationManager.ViewModels
 
         public async Task RevertRomStreamingCompatibilityAsync()
         {
-            if (CheckModelValidity())
+            if (CheckModelValidity() && CheckCanDoWork())
             {
                 await Task.Run(() =>
                 {
                     IsLoading = true;
-                    LoadingText = "Fixing rom streaming compatibility...";
+                    LoadingText = "Reverting rom streaming compatibility...";
 
                     RomModels = IOHelper.RevertRomsFromStreaming(RomModels);
 
@@ -187,12 +187,12 @@ namespace EmulationManager.ViewModels
 
         public async Task FixRomStreamingCompatibilityAsync()
         {
-            if (CheckModelValidity())
+            if (CheckModelValidity() && CheckCanDoWork())
             {
                 await Task.Run(() =>
                 {
                     IsLoading = true;
-                    LoadingText = "Reverting rom streaming compatibility...";
+                    LoadingText = "Fixing rom streaming compatibility...";
 
                     RomModels = IOHelper.FixRomsForStreaming(RomModels);
 
@@ -208,7 +208,7 @@ namespace EmulationManager.ViewModels
 
         public async Task CreateSteamShortcutsAsync()
         {
-            if (CheckModelValidity())
+            if (CheckModelValidity() && CheckCanDoWork())
             {
                 await LoadRomsAndEmulatorsAsync();
                 await Task.Run(() =>
@@ -241,6 +241,16 @@ namespace EmulationManager.ViewModels
         public bool CheckModelValidity()
         {
             return EmulatorModels != null && EmulatorModels.Length > 0 && RomModels != null && RomModels.Length > 0;
+        }
+
+        public bool CheckCanDoWork()
+        {
+            if (IsLoading)
+            {
+                DebugManager.ShowErrorDialog("Please wait for the current operation to finish before proceeding.", null);
+                return false;
+            }
+            return true;
         }
     }
 }
