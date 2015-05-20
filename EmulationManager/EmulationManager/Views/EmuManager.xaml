@@ -57,7 +57,7 @@
                     </StackPanel>
                 </StackPanel>
 
-                <StackPanel Name="EmulatorFunctions" Margin="0,15,0,0" HorizontalAlignment="Left">
+                <StackPanel Name="EmulatorFunctions" Margin="0,15,0,0" HorizontalAlignment="Left" Visibility="Collapsed">
                     <TextBlock FontSize="14" FontWeight="Medium">Emulator Functions</TextBlock>
                     <StackPanel Orientation="Horizontal" Height="35">
                         <Button Name="DownloadEmulatorPack" Padding="3" FontSize="16">Download Emulator Pack</Button>
