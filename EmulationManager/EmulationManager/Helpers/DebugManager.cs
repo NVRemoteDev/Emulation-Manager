@@ -11,7 +11,17 @@ namespace EmulationManager.Helpers
     {
         public static void ShowErrorDialog(string errorMessage, Exception exception)
         {
-            MessageBox.Show(errorMessage + Environment.NewLine + exception.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+            string dialogErrorText = "";
+            if (exception == null)
+            {
+                dialogErrorText = errorMessage;
+            }
+            else
+            {
+                dialogErrorText = errorMessage + Environment.NewLine + exception.Message;
+            }
+
+            MessageBox.Show(dialogErrorText, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
         }
     }
 }
