@@ -213,31 +213,51 @@ namespace EmulationManager.Helpers
         /// <summary>
         /// Changes the ROM filename to be compatible with streaming over Steam Big Picture
         /// </summary>
-        public static void FixRomsForStreaming(RomModel[] roms)
+        public static RomModel[] FixRomsForStreaming(RomModel[] roms)
         {
+            RomModel[] newRoms = new RomModel[roms.Length];
+
+            int i = 0;
             foreach (var rom in roms)
             {
                 if (!string.IsNullOrEmpty(rom.Path) && !string.IsNullOrEmpty(rom.StreamingCompatiblePath))
                 {
-                    File.Move(rom.Path, rom.StreamingCompatiblePath);
+                    if (rom.Path != rom.StreamingCompatiblePath)
+                    {
+                        File.Move(rom.Path, rom.StreamingCompatiblePath);
+                    }
                     rom.UseStreamingCompatiblePath = true;
+                    roms[i] = rom;
                 }
+                i++;
             }
+            return newRoms;
         }
 
         /// <summary>
         /// Reverts the FixRomsForStreaming changes
         /// </summary>
-        public static void RevertRomsFromStreaming(RomModel[] roms)
+        public static RomModel[] RevertRomsFromStreaming(RomModel[] roms)
         {
+            RomModel[] newRoms = new RomModel[roms.Length];
+
+            int i = 0;
             foreach (var rom in roms)
             {
                 if (!string.IsNullOrEmpty(rom.Path) && !string.IsNullOrEmpty(rom.StreamingCompatiblePath))
                 {
-                    File.Move(rom.StreamingCompatiblePath, rom.Path);
+                    rom.Path = rom.StreamingCompatiblePath.Replace(ConfigurationHelper.GetStreamingCompatiblityReplacementName(), " ");
+                    if (rom.Path != rom.StreamingCompatiblePath)
+                    {
+                        File.Move(rom.StreamingCompatiblePath, rom.Path);
+                    }
                     rom.UseStreamingCompatiblePath = false;
+                    
+                    newRoms[i] = rom;
                 }
+                i++;
             }
+            return newRoms;
         }
     }
 }

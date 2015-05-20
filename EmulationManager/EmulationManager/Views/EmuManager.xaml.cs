@@ -164,9 +164,27 @@ Enter 'C:\Emulators' (trailing slash optional)";
             {
                 System.Diagnostics.Process.Start("http://www.hometheatertablet.com/tritium-emulation-manager-steam/");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Unable to open website.");
+            }
+        }
+
+        private void RevertRomStreamingCompatibilityButton_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("This will rename your rom files. This is recommended for streaming. Proceed?",
+                "Rename Roms Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning, MessageBoxResult.Cancel);
+
+            if (result != MessageBoxResult.Yes)
+                return;
+            var viewModel = mainGrid.DataContext as ViewModels.EmuManagerViewModel;
+            if (viewModel != null && viewModel.FixRomStreamingCompatibilityCommand.CanExecute(null))
+            {
+                viewModel.FixRomStreamingCompatibilityCommand.Execute(null);
+            }
+            else
+            {
+                MessageBox.Show("Unable to execute command. Did you load Roms and Emulators?");
             }
         }
     }

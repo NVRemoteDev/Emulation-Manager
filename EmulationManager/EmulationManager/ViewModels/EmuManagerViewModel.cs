@@ -173,7 +173,7 @@ namespace EmulationManager.ViewModels
                     IsLoading = true;
                     LoadingText = "Fixing rom streaming compatibility...";
 
-                    IOHelper.RevertRomsFromStreaming(RomModels);
+                    RomModels = IOHelper.RevertRomsFromStreaming(RomModels);
 
                     LoadingText = string.Empty;
                     IsLoading = false;
@@ -192,9 +192,9 @@ namespace EmulationManager.ViewModels
                 await Task.Run(() =>
                 {
                     IsLoading = true;
-                    LoadingText = "Fixing rom streaming compatibility...";
+                    LoadingText = "Reverting rom streaming compatibility...";
 
-                    IOHelper.FixRomsForStreaming(RomModels);
+                    RomModels = IOHelper.FixRomsForStreaming(RomModels);
 
                     LoadingText = string.Empty;
                     IsLoading = false;
