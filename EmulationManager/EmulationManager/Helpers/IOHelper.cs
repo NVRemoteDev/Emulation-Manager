@@ -40,6 +40,14 @@ namespace EmulationManager.Helpers
                     // This would mean an improperly formatted emulator association was present if hit
                     continue;
                 }
+<<<<<<< HEAD
+=======
+                catch (IOException)
+                {
+                    // This would mean the emulator directory was set incorrectly or unreadable
+                    continue;
+                }
+>>>>>>> origin/master
 
             }
 
@@ -62,9 +70,23 @@ namespace EmulationManager.Helpers
             int romCount = 0;
             foreach (string extension in romExtensions)
             {
+<<<<<<< HEAD
                 string[] files = System.IO.Directory.GetFiles(rootRomDirectory, "*." + extension, SearchOption.AllDirectories);
 
                 romCount += files.Length;
+=======
+                try
+                {
+                    string[] files = System.IO.Directory.GetFiles(rootRomDirectory, "*." + extension, SearchOption.AllDirectories);
+
+                    romCount += files.Length;
+                }
+                catch (IOException)
+                {
+                    // This would mean the emulator directory was set incorrectly or unreadable
+                    continue;
+                }
+>>>>>>> origin/master
             }
                 
             return romCount;
@@ -112,6 +134,14 @@ namespace EmulationManager.Helpers
                     // This would mean an improperly formatted emulator association was present if hit
                     continue;
                 }
+<<<<<<< HEAD
+=======
+                catch (IOException)
+                {
+                    // This would mean the emulator directory was set incorrectly or unreadable
+                    continue;
+                }
+>>>>>>> origin/master
             }
 
             return models;
@@ -155,6 +185,13 @@ namespace EmulationManager.Helpers
             {
                 // This would mean an improperly formatted emulator association was present if hit
             }
+<<<<<<< HEAD
+=======
+            catch (IOException)
+            {
+                // This would mean the rom directory was set incorrectly or unreadable
+            }
+>>>>>>> origin/master
 
             return models;
         }

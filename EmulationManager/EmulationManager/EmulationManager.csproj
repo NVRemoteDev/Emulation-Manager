@@ -57,6 +57,11 @@
   <ItemGroup>
     <Reference Include="Ookii.Dialogs.Wpf">
       <HintPath>..\packages\Ookii.Dialogs.1.0\lib\net35\Ookii.Dialogs.Wpf.dll</HintPath>
+<<<<<<< HEAD
+=======
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
+>>>>>>> origin/master
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -128,6 +133,15 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+<<<<<<< HEAD
+=======
+    <None Include="ControllerConfigurations\PCSX2.SHIELD.Controller.Setting.lily">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ControllerConfigurations\zinput.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+>>>>>>> origin/master
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -141,10 +155,19 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Resource Include="LICENSE.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <None Include="README.md" />
+=======
+    <None Include="LICENSE.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="README.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+>>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
