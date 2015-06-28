@@ -11,7 +11,6 @@ Please feel free to fork if you want to help!
 
 Inspired by https://github.com/scottrice/Ice
 
-<<<<<<< HEAD
 =======
 # Controller Configurations
 Inside the release folder (or the ControllerConfigurations folder if you're looking at the source) you will find some basic Shield controller configurations.
@@ -29,7 +28,6 @@ You may have to launch ZSNES first and make your own custom resolution and video
 ## PCSX2
 Load the .lily file for Shield controller support
 
->>>>>>> origin/master
 # License
 GPLv2 See LICENSE.txt
 
