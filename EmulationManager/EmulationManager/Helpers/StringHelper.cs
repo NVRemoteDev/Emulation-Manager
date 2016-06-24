@@ -23,7 +23,11 @@ namespace EmulationManager.Helpers
             {
                 return "";
             }
-            return input.Replace(Environment.NewLine, "");
+            input = input.Replace(Environment.NewLine, "");
+            input = input.Replace("\n", "");
+            input = input.Replace("\r", "");
+
+            return input;
         }
 
         public static string CleanXmlValues(string input)
@@ -38,7 +42,11 @@ namespace EmulationManager.Helpers
             {
                 input = input.Replace("; ", ";");
             }
-            return input;
+            while (input.Contains(" ;"))
+            {
+                input = input.Replace(" ;", ";");
+            }
+            return input.Trim();
         }
     }
 }

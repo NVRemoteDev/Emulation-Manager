@@ -103,7 +103,7 @@
                         <TextBlock x:Name="ShowHideAdvancedSettingsTextBlock" VerticalAlignment="Bottom" Margin="5,0,0,0" Foreground="#FF0017FF" TextDecorations="Underline" Cursor="Hand" ToolTip="Show or hide advanced settings" MouseUp="ShowHideAdvancedSettingsTextBlock_MouseUp">Show/Hide...</TextBlock>
                     </StackPanel>
 
-                    <StackPanel Name="AdvancedSettingsValues" Visibility="Collapsed">
+                    <StackPanel Name="AdvancedSettingsValues" >
                         <TextBlock Margin="0,0,0,10">Only modify these if you know what you're doing. These can also be edited in the config file in this program's directory.</TextBlock>
                         
                         <TextBlock>Grid Images API URL</TextBlock>

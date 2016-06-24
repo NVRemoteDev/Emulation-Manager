@@ -33,7 +33,7 @@ namespace EmulationManager
             var dialog = new VistaFolderBrowserDialog();
             if (dialog.ShowDialog() == true)
             {
-                RomDirectoryTextBox.Text = dialog.SelectedPath;
+                //RomDirectoryTextBox.Text = dialog.SelectedPath;
             }
         }
 
@@ -42,7 +42,7 @@ namespace EmulationManager
             var dialog = new VistaFolderBrowserDialog();
             if (dialog.ShowDialog() == true)
             {
-                EmulatorDirectoryTextBox.Text = dialog.SelectedPath;
+                //EmulatorDirectoryTextBox.Text = dialog.SelectedPath;
             }
         }
 
