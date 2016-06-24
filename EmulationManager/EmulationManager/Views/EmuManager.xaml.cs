@@ -31,18 +31,20 @@ namespace EmulationManager
         private void BrowseRomDirectoryButton_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new VistaFolderBrowserDialog();
+            dialog.RootFolder = Environment.SpecialFolder.CommonDocuments;
             if (dialog.ShowDialog() == true)
             {
-                //RomDirectoryTextBox.Text = dialog.SelectedPath;
+                RomDirectoryTextBox.Text = dialog.SelectedPath;
             }
         }
 
         private void BrowseEmulatorDirectoryButton_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new VistaFolderBrowserDialog();
+            dialog.RootFolder = Environment.SpecialFolder.CommonDocuments;
             if (dialog.ShowDialog() == true)
             {
-                //EmulatorDirectoryTextBox.Text = dialog.SelectedPath;
+                EmulatorDirectoryTextBox.Text = dialog.SelectedPath;
             }
         }
 
